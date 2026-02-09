@@ -1,0 +1,77 @@
+.page {
+  min-height: 100vh;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.shell {
+  width: 100%;
+  max-width: 520px;
+  border-radius: var(--radius-xl);
+  background: #1b1b1b;
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.brandIcon {
+  width: 34px;
+  height: 22px;
+}
+
+.brandText {
+  font-family: var(--second-family);
+  font-weight: var(--fw-700);
+  letter-spacing: 0.04em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 18px;
+  font-size: 36px;
+  line-height: 1.05;
+  font-weight: var(--fw-700);
+}
+
+.dim {
+  color: rgba(249, 249, 249, 0.35);
+}
+
+.formArea {
+  margin-top: 18px;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    max-width: 672px;
+    padding: 32px;
+    border-radius: 32px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding: 32px;
+  }
+
+  .shell {
+    max-width: 960px;
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 72px;
+  }
+}

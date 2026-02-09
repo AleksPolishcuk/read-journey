@@ -1,0 +1,36 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--c-text);
+  color: #141414;
+  font-weight: var(--fw-700);
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:hover {
+  background-color: var(--bg);
+  color: var(--c-text);
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  opacity: 0.9;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+:root {
+  --bg-main: #141414;
+  --bg-card: #1f1f1f;
+  --text-white: #f9f9f9;
+  --text-gray: #686868;
+  --light-gray: #e3e3e3;
+  --accent: #30b94d;
+  --error: #e90516;
+  --radius-xl: 30px;
+  --radius-m: 12px;
+}
