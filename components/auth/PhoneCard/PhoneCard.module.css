@@ -1,0 +1,16 @@
+.card {
+  background: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px 40px 0 40px;
+}
+
+.media {
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  /* height: auto; */
+
+  border-radius: none;
+}

@@ -1,18 +1,18 @@
 "use client";
 
-import styles from "./RegisterForm.module.css";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerValidationSchema } from "@/lib/validation/schemas";
-import Input from "@/components/ui/Input/Input";
-import PasswordInput from "@/components/ui/PasswordInput/PasswordInput";
-import Button from "@/components/ui/Button/Button";
-import { useRegisterMutation } from "@/lib/api/authApi";
-import { useAppDispatch } from "@/redux/index";
-import { setCredentials } from "@/redux/auth/authSlice";
-import { routes } from "@/lib/constants/routes";
+import toast from "react-hot-toast";
+
+import styles from "./RegisterForm.module.css";
+import { Input } from "@/components/common/Input/Input";
+import { registerValidationSchema } from "@/lib/validation/authSchemas";
+import { useRegisterMutation } from "@/services/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { setCredentials } from "@/redux/features/authSlice";
 
 type FormValues = {
   name: string;
@@ -20,10 +20,11 @@ type FormValues = {
   password: string;
 };
 
-export default function RegisterForm() {
+export function RegisterForm() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [registerUser, { isLoading }] = useRegisterMutation();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -31,63 +32,58 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(registerValidationSchema),
-    mode: "onBlur",
-    defaultValues: { name: "", email: "", password: "" },
   });
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     try {
-      const data = await registerUser(values).unwrap();
-      dispatch(setCredentials({ token: data.token, user: data.user }));
-      router.replace(routes.root);
-    } catch (e) {
-      alert(getApiErrorMessage(e));
+      const res = await registerUser(data).unwrap();
+      dispatch(setCredentials(res));
+      toast.success("Registered");
+      router.replace("/recommended");
+    } catch (e: any) {
+      const msg = e?.data?.message || e?.error || "Registration failed";
+      toast.error(msg);
     }
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        label="Name:"
-        placeholder="Your name"
-        {...register("name")}
+        label="Name"
+        type="text"
+        placeholder="Ilona Ratushniak"
         error={errors.name?.message}
+        {...register("name")}
       />
 
       <Input
-        label="Mail:"
+        label="Mail"
+        type="email"
         placeholder="Your@email.com"
-        {...register("email")}
         error={errors.email?.message}
+        {...register("email")}
       />
 
-      <PasswordInput
-        label="Password:"
+      <Input
+        label="Password"
+        type={showPassword ? "text" : "password"}
         placeholder="Your password here"
-        {...register("password")}
         error={errors.password?.message}
+        showToggle
+        isPasswordVisible={showPassword}
+        onTogglePassword={() => setShowPassword((prev) => !prev)}
+        {...register("password")}
       />
 
-      <div className={styles.actions}>
-        <Button type="submit" fullWidth disabled={isLoading}>
+      <div className={styles.row}>
+        <button className={styles.submit} type="submit" disabled={isLoading}>
           Registration
-        </Button>
+        </button>
 
-        <Link className={styles.link} href={routes.login}>
+        <Link className={styles.link} href="/login">
           Already have an account?
         </Link>
       </div>
     </form>
-  );
-}
-
-function getApiErrorMessage(err: unknown): string {
-  if (!err || typeof err !== "object") return "Something went wrong";
-  const anyErr = err as any;
-  return (
-    anyErr?.data?.message ||
-    anyErr?.error ||
-    anyErr?.message ||
-    "Something went wrong"
   );
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { StoreProvider } from "@/redux/provider";
+import ReduxProvider from "@/redux/provider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Read Journey",
-  description: "Read Journey app",
+  description: "Read Journey App",
 };
 
 export default function RootLayout({
@@ -15,7 +16,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <ReduxProvider>
+          {children}
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+            }}
+          />
+        </ReduxProvider>
       </body>
     </html>
   );

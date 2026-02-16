@@ -1,0 +1,26 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 48px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  stroke: #f9f9f9;
+}
+
+.title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: var(--fw-700);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.muted {
+  color: var(--c-muted);
+}

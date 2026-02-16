@@ -34,10 +34,14 @@
   --fw-700: 700;
 
   --c-bg: #141414;
-  --c-surface: #1f1f1f;
+  --c-black: #1f1f1f;
   --c-text: #f9f9f9;
-  --c-muted: #686868;
-  --c-border: rgba(249, 249, 249, 0.2);
+  --c-gray: #686868;
+  --c-input-bg: #262626;
+  --c-muted: rgba(227, 227, 227, 0.5);
+  --c-border: rgba(249, 249, 249, 0.1);
+
+  --c-error: #e90516;
 
   --radius-xl: 30px;
   --radius-lg: 16px;
