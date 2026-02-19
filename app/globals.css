@@ -40,6 +40,7 @@
   --c-input-bg: #262626;
   --c-muted: rgba(227, 227, 227, 0.5);
   --c-border: rgba(249, 249, 249, 0.1);
+  --c-backdrop: rgba(20, 20, 20, 0.6);
 
   --c-error: #e90516;
 
@@ -53,6 +54,7 @@
   --bp-768: 768px;
   --bp-1440: 1440px;
 
+  /* --container-mobile: 335px; */
   --container-1440: 1440px;
 }
 

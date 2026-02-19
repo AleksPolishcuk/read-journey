@@ -8,13 +8,10 @@ export const api = createApi({
     prepareHeaders: (headers, { getState }) => {
       const accessToken = (getState() as RootState).auth.accessToken;
 
-      if (accessToken) {
-        headers.set("Authorization", `Bearer ${accessToken}`);
-      }
-
+      if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
       return headers;
     },
   }),
-  tagTypes: ["Auth"],
+  tagTypes: ["Auth", "Recommend", "Book", "Library"],
   endpoints: () => ({}),
 });

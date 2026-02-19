@@ -1,0 +1,171 @@
+.page {
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--c-bg);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: min(var(--container-mobile), calc(100% - 40px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* dashboard */
+.dashboardCard {
+  background: var(--c-black);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+}
+
+.infoCard {
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.infoTitle {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-700);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 40px 1fr; /* під 40x40 коло */
+  gap: 12px;
+  align-items: center; /* вирівнювання як у макеті */
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stepNum {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--c-text);
+  color: var(--c-black);
+  font-weight: var(--fw-700);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.stepTitle {
+  font-weight: var(--fw-700); /* у макеті акцент жирний */
+  color: var(--c-text);
+}
+
+.stepText {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  font-family: var(--second-family);
+  color: rgba(249, 249, 249, 0.55);
+}
+
+.myLibraryRow {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--c-gray);
+  font-size: 12px;
+  font-family: var(--second-family);
+  cursor: pointer;
+}
+.myLibraryLink {
+  border-bottom: 1px solid var(--c-gray);
+}
+
+.myLibraryBtn {
+  cursor: pointer;
+}
+
+.myLibraryBtn:hover {
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  border: 1px solid rgba(249, 249, 249, 0.18);
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+
+/* books card */
+.booksCard {
+  background: var(--c-black);
+  border-radius: var(--radius-xl);
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.booksHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.booksTitle {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-700);
+}
+
+.pager {
+  display: flex;
+  gap: 8px;
+}
+
+.pagerBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 249, 249, 0.18);
+  background: transparent;
+  color: rgba(249, 249, 249, 0.9);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.pagerBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.state {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--second-family);
+}
+
+.booksGrid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 12px;
+  max-height: 260px;
+  overflow: hidden;
+}

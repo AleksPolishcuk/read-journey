@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  /* ключове: однакова висота всіх карток */
+  height: 260px;
+}
+
+.coverBtn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.coverImg,
+.coverStub {
+  width: 100%;
+  height: 190px;
+  border-radius: 12px;
+}
+
+.coverStub {
+  background: #d9d9d9;
+}
+
+.coverImg {
+  display: block;
+  object-fit: cover;
+}
+
+.title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: var(--fw-700);
+
+  /* завжди 2 рядки по висоті */
+  line-height: 1.25;
+  min-height: calc(12px * 1.25 * 2);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.author {
+  margin: 0;
+  font-size: 10px;
+  color: rgba(249, 249, 249, 0.45);
+  font-family: var(--second-family);
+
+  /* завжди 1 рядок по висоті */
+  line-height: 1.2;
+  min-height: calc(10px * 1.2);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.link {
+  font-family: var(--second-family);
+  font-size: 14px;
+  color: rgba(249, 249, 249, 0.35);
+  position: relative;
+}
+
+.active {
+  color: var(--c-text);
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  margin: 0 auto;
+  width: 34px;
+  background: #3b82f6; /* синя лінія як у макеті */
+  border-radius: 2px;
+}

@@ -1,0 +1,62 @@
+.filtersTitle {
+  margin: 0 0 0 12px;
+  font-size: 10px;
+  color: var(--c-text);
+  font-family: var(--font-family);
+  font-weight: var(--fw-500);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+}
+
+.field:hover {
+  border-color: var(--c-border);
+}
+
+.fieldLabel {
+  font-size: 12px;
+  color: var(--c-gray);
+  white-space: nowrap;
+}
+
+.fieldInput {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--c-text);
+  font-family: var(--second-family);
+  font-size: 12px;
+}
+
+.fieldInput::placeholder {
+  color: var(--c-text);
+}
+
+.applyBtn {
+  align-self: flex-start;
+  height: 34px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 249, 249, 0.25);
+  background: transparent;
+  color: var(--c-text);
+  font-family: var(--second-family);
+  font-size: 12px;
+  cursor: pointer;
+}
