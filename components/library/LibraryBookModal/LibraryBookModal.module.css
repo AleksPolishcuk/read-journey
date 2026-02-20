@@ -1,0 +1,125 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 70;
+  padding: 20px;
+}
+
+.modal {
+  width: min(335px, 100%);
+  background: var(--c-black);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.state {
+  margin: 0;
+  font-family: var(--second-family);
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.6);
+}
+
+.media {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.cover,
+.coverStub {
+  width: 160px;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+}
+
+.coverStub {
+  background: #d9d9d9;
+}
+
+.cover {
+  object-fit: cover;
+  display: block;
+}
+
+.info {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--fw-700);
+  line-height: 1.2;
+  max-width: 260px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.author {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--second-family);
+  line-height: 1.2;
+  max-width: 260px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pages {
+  margin: 0;
+  font-size: 10px;
+  color: rgba(249, 249, 249, 0.8);
+  font-family: var(--second-family);
+  line-height: 1.2;
+}
+
+.btn {
+  margin: 20px 0 30px;
+  padding: 12px 0;
+  width: 140px;
+  border-radius: 30px;
+  border: 1px solid var(--c-gray);
+  background: var(--c-black);
+  color: var(--c-text);
+  font-weight: var(--fw-700);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--c-text);
+  color: var(--c-black);
+  transition: background 0.2s ease;
+}

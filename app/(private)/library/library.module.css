@@ -22,7 +22,7 @@
 
 /* Recommended books block inside dashboard */
 .recCard {
-  margin-top: 14px;
+  margin-top: 20px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-lg);
   padding: 14px;
@@ -56,19 +56,21 @@
   gap: 10px;
 }
 
+/* прибрати фікс ширину */
 .recItem {
   border: 0;
   padding: 0;
   background: transparent;
-  text-align: left;
   cursor: pointer;
-  min-width: 0;
+  min-width: 0; /* щоб text ellipsis працював */
+  width: 100%; /* заповнити колонку */
+  text-align: left;
 }
 
 .recImg {
-  width: 100%;
-  height: 80px;
-  border-radius: 10px;
+  width: 100%; /* ключове */
+  height: 107px;
+  border-radius: 8px;
   object-fit: cover;
   display: block;
 }

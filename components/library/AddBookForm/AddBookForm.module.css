@@ -1,0 +1,39 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  margin: 0 0 0 14px;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-500);
+  color: var(--c-text);
+  font-family: var(--font-family);
+}
+
+.submit {
+  margin-top: 10px;
+  height: 40px;
+  width: 140px;
+  border-radius: 30px;
+  border: 1px solid rgba(249, 249, 249, 0.18);
+  background: transparent;
+  color: var(--c-text);
+  font-weight: var(--fw-700);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: var(--c-text);
+  color: var(--c-black);
+  transition: background 0.2s ease;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

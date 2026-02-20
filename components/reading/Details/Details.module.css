@@ -1,0 +1,68 @@
+.card {
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+/* Header row: "Diary"/"Statistics" + icons справа */
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: var(--fw-700);
+  letter-spacing: -0.02em;
+}
+
+/* icons справа як на макеті */
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 249, 249, 0.12);
+  background: transparent;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(249, 249, 249, 0.9);
+}
+
+.toolBtn svg {
+  opacity: 0.55;
+}
+
+.toolBtnActive {
+  border-color: rgba(249, 249, 249, 0.9);
+}
+
+.toolBtnActive svg {
+  opacity: 1;
+}
+
+.toolBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* “внутрішня” панель з контентом */
+.body {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 14px;
+  overflow: hidden;
+}

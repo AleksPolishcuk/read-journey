@@ -10,7 +10,7 @@ import { Header } from "@/components/layout/Header/Header";
 import styles from "./library.module.css";
 
 import { AddBookForm } from "@/components/library/AddBookForm/AddBookForm";
-import { CreateBookSuccessModal } from "@/components/library/CreateBookSuccessModal/CreateBookSuccessModal";
+import { CreateBookSuccessModal } from "@/components/library/BookAddModal/BookAddModal";
 
 import { MyLibraryBooks } from "@/components/library/MyLibraryBooks/MyLibraryBooks";
 import { LibraryBookModal } from "@/components/library/LibraryBookModal/LibraryBookModal";
@@ -19,7 +19,6 @@ import { useGetRecommendedQuery } from "@/services/booksApi";
 import type { RecommendedBook } from "@/services/booksApi";
 
 export default function LibraryPage() {
-  // Recommended strip in dashboard (as in макет)
   const { data: recData } = useGetRecommendedQuery({
     page: 1,
     perPage: 3,
@@ -51,15 +50,6 @@ export default function LibraryPage() {
             <div className={styles.recCard}>
               <div className={styles.recHead}>
                 <p className={styles.recTitle}>Recommended books</p>
-                <Link
-                  className={styles.recLink}
-                  href="/recommended"
-                  aria-label="Go to Recommended"
-                >
-                  <svg width="24" height="24">
-                    <use href="/sprite.svg#icon-log-in" />
-                  </svg>
-                </Link>
               </div>
 
               <div className={styles.recStrip}>
@@ -84,7 +74,15 @@ export default function LibraryPage() {
 
               <div className={styles.recFooter}>
                 <span className={styles.recFooterText}>Home</span>
-                <span className={styles.recArrow}>→</span>
+                <Link
+                  className={styles.recLink}
+                  href="/recommended"
+                  aria-label="Go to Recommended"
+                >
+                  <svg width="20" height="20">
+                    <use href="/sprite.svg#icon-log-in" />
+                  </svg>
+                </Link>
               </div>
             </div>
           </section>

@@ -23,11 +23,6 @@ export type GetRecommendBooksResponse = {
   perPage: number;
 };
 
-/**
- * Book response у Swagger у тебе повторюється як:
- * AddNewBookResponse / StartReadingBookResponse / FinishReadingBookResponse / UsersBooksResponse
- * Мінімально універсальний тип для UI.
- */
 export type BookProgressItem = {
   startPage: number;
   startReading: string; // ISO
@@ -37,21 +32,21 @@ export type BookProgressItem = {
   status?: "active" | "inactive";
 };
 
-export type UserBook = {
-  _id: string;
-  title: string;
-  author: string;
-  imageUrl: string | null;
-  totalPages: number;
-  status: "unread" | "in-progress" | "done";
-  progress: BookProgressItem[];
-  owner: string;
-  timeLeftToRead?: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
-};
+// export type UserBook = {
+//   _id: string;
+//   title: string;
+//   author: string;
+//   imageUrl: string | null;
+//   totalPages: number;
+//   status: "unread" | "in-progress" | "done";
+//   progress: BookProgressItem[];
+//   owner: string;
+//   timeLeftToRead?: {
+//     hours: number;
+//     minutes: number;
+//     seconds: number;
+//   };
+// };
 
 export type AddNewBookRequest = {
   title: string;
@@ -64,9 +59,42 @@ export type RemoveBookResponse = {
   message: string;
 };
 
+export type ReadingProgress = {
+  _id?: string; 
+  readingId?: string;
+  startPage: number;
+  startReading: string;
+  finishPage?: number;
+  finishReading?: string; 
+  speed?: number;
+  status: "active" | "inactive";
+};
+
+export type TimeLeftToRead = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+export type UserBook = {
+  _id: string;
+  title: string;
+  author: string;
+  imageUrl?: string | null;
+  totalPages: number;
+  status: "unread" | "in-progress" | "done";
+  owner?: string;
+  progress: ReadingProgress[];
+  timeLeftToRead?: TimeLeftToRead;
+};
+
+export type StartReadingRequest = { id: string; page: number };
+export type FinishReadingRequest = { id: string; page: number };
+export type DeleteReadingRequest = { bookId: string; readingId: string };
+
 export const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // RECOMMENDED
+
     getRecommended: builder.query<GetRecommendBooksResponse, GetRecommendQuery>(
       {
         query: ({ page, perPage, title, author }) => ({
@@ -124,27 +152,32 @@ export const booksApi = api.injectEndpoints({
       invalidatesTags: ["Library"],
     }),
 
-    startReading: builder.mutation<UserBook, { id: string; page: number }>({
+    startReading: builder.mutation<UserBook, StartReadingRequest>({
       query: (body) => ({
         url: "/books/reading/start",
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Library", "Book"],
+      invalidatesTags: (_res, _err, arg) => [{ type: "Book", id: arg.id }],
     }),
 
-    // FINISH READING
-    finishReading: builder.mutation<UserBook, { id: string; page: number }>({
+    finishReading: builder.mutation<UserBook, FinishReadingRequest>({
       query: (body) => ({
         url: "/books/reading/finish",
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Library", "Book"],
+      invalidatesTags: (_res, _err, arg) => [{ type: "Book", id: arg.id }],
     }),
 
-    // DELETE READING EVENT (у Swagger: DELETE /books/reading)
-    // але там на скріні не видно body/query — тому цей endpoint додамо коли буде видно схему.
+    deleteReading: builder.mutation<UserBook, DeleteReadingRequest>({
+      query: ({ bookId, readingId }) => ({
+        url: "/books/reading",
+        method: "DELETE",
+        params: { bookId, readingId },
+      }),
+      invalidatesTags: (_res, _err, arg) => [{ type: "Book", id: arg.bookId }],
+    }),
   }),
 });
 
@@ -157,4 +190,5 @@ export const {
   useRemoveBookMutation,
   useStartReadingMutation,
   useFinishReadingMutation,
+  useDeleteReadingMutation,
 } = booksApi;

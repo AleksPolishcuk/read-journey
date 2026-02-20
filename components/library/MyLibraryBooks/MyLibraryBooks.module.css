@@ -1,0 +1,144 @@
+.card {
+  background: var(--c-black);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-700);
+}
+
+.select {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 249, 249, 0.18);
+  background: transparent;
+  color: rgba(249, 249, 249, 0.9);
+  font-size: 12px;
+  font-family: var(--font-family);
+  outline: none;
+}
+
+.state {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--font-family);
+}
+
+.empty {
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  text-align: center;
+}
+
+.emoji {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.emptyText {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--font-family);
+}
+
+.grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 137px);
+  gap: 20px;
+  justify-content: center; /* центрує дві колонки в ширшому контейнері */
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.coverBtn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cover,
+.stub {
+  width: 100%;
+  height: 208px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+
+.stub {
+  background: #d9d9d9;
+}
+
+.metaRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.meta {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: var(--fw-700);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+
+  /* display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
+  overflow: hidden;
+}
+
+.author {
+  margin: 2px 0 0;
+  font-size: 10px;
+  color: rgba(249, 249, 249, 0.45);
+  font-family: var(--font-family);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.delete:hover {
+}

@@ -1,0 +1,158 @@
+/* Скрол усередині, як на макеті (видимий “пруток”) */
+.list {
+  position: relative;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 10px; /* місце під scrollbar */
+}
+
+/* тонкий scrollbar (Chrome/Safari) */
+.list::-webkit-scrollbar {
+  width: 4px;
+}
+.list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+}
+.list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+}
+
+/* timeline line зліва */
+.list::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+/* чекбокс як на макеті */
+.checkWrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.check {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(249, 249, 249, 0.9);
+  display: grid;
+  place-items: center;
+}
+
+/* контент блоку події */
+.content {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+/* date row */
+.dateRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-family: var(--second-family);
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.9);
+}
+
+/* ліва колонка: % і minutes */
+.leftInfo {
+  display: grid;
+  gap: 6px;
+}
+
+.percent {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--fw-700);
+  letter-spacing: -0.02em;
+}
+
+.minutes {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.45);
+  font-family: var(--second-family);
+}
+
+/* права колонка: pages + pages/hour + delete */
+.right {
+  text-align: right;
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+}
+
+.pages {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.45);
+  font-family: var(--second-family);
+}
+
+.speed {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.45);
+  font-family: var(--second-family);
+}
+
+/* маленький графік-прогрес справа */
+.miniChart {
+  width: 74px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.miniChartFill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 6px;
+  width: 60%;
+  background: #0cbf4a; /* зелений як у макеті */
+  border-radius: 8px;
+}
+
+/* delete */
+.deleteBtn {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+}

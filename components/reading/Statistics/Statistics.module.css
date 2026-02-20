@@ -1,0 +1,62 @@
+.wrap {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.ring {
+  --p: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: conic-gradient(
+    #16c784 calc(var(--p) * 1%),
+    rgba(255, 255, 255, 0.07) 0
+  );
+  display: grid;
+  place-items: center;
+}
+
+.center {
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.45);
+  display: grid;
+  place-items: center;
+}
+
+.big {
+  font-size: 18px;
+  font-weight: var(--fw-700);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: #16c784;
+}
+
+.legendText {
+  display: grid;
+  gap: 2px;
+}
+
+.legendPercent {
+  font-size: 12px;
+  font-weight: var(--fw-700);
+}
+
+.legendSub {
+  font-size: 10px;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--second-family);
+}
