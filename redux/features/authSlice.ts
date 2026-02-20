@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { User } from "@/services/authApi";
 
-/**
- * Підтримуємо різні назви токенів з backend:
- * - accessToken | access_token | token
- * - refreshToken | refresh_token
- */
 type AnyAuthPayload = {
   accessToken?: string;
   access_token?: string;
@@ -39,6 +34,26 @@ function normalizeToken(value: unknown): string | null {
   return value;
 }
 
+function setCookie(name: string, value: string) {
+  document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; SameSite=Lax`;
+}
+
+function clearCookie(name: string) {
+  document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;
+}
+
+function readCookie(name: string): string | null {
+  const parts = document.cookie.split(";").map((p) => p.trim());
+  const found = parts.find((p) => p.startsWith(`${name}=`));
+  if (!found) return null;
+  const raw = found.slice(name.length + 1);
+  try {
+    return normalizeToken(decodeURIComponent(raw));
+  } catch {
+    return normalizeToken(raw);
+  }
+}
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -66,7 +81,17 @@ const authSlice = createSlice({
 
         if (refreshToken) localStorage.setItem("refreshToken", refreshToken);
         else localStorage.removeItem("refreshToken");
+
+        if (accessToken) setCookie("accessToken", accessToken);
+        else clearCookie("accessToken");
+
+        if (refreshToken) setCookie("refreshToken", refreshToken);
+        else clearCookie("refreshToken");
       }
+    },
+
+    setUser(state, action: PayloadAction<User | null>) {
+      state.user = action.payload ?? null;
     },
 
     clearAuth(state) {
@@ -78,18 +103,22 @@ const authSlice = createSlice({
       if (typeof window !== "undefined") {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+
+        clearCookie("accessToken");
+        clearCookie("refreshToken");
       }
     },
 
     hydrateAuth(state) {
       if (typeof window !== "undefined") {
-        const accessToken = normalizeToken(localStorage.getItem("accessToken"));
-        const refreshToken = normalizeToken(
-          localStorage.getItem("refreshToken"),
-        );
+        const lsAccess = normalizeToken(localStorage.getItem("accessToken"));
+        const lsRefresh = normalizeToken(localStorage.getItem("refreshToken"));
 
-        state.accessToken = accessToken;
-        state.refreshToken = refreshToken;
+        const ckAccess = readCookie("accessToken");
+        const ckRefresh = readCookie("refreshToken");
+
+        state.accessToken = lsAccess ?? ckAccess;
+        state.refreshToken = lsRefresh ?? ckRefresh;
       }
 
       state.isHydrated = true;
@@ -97,5 +126,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, clearAuth, hydrateAuth } = authSlice.actions;
+export const { setCredentials, setUser, clearAuth, hydrateAuth } =
+  authSlice.actions;
+
 export default authSlice.reducer;

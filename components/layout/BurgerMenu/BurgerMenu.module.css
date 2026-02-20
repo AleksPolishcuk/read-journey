@@ -41,7 +41,7 @@
 }
 
 .nav {
-  margin-top: 280px; /* як на макеті – меню по центру */
+  margin-top: 280px;
   display: flex;
   justify-content: center;
 }
@@ -51,4 +51,5 @@
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
+  color: var(--c-text);
 }

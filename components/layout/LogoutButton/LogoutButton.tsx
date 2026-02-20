@@ -22,7 +22,7 @@ export function LogoutButton() {
     } finally {
       dispatch(clearAuth());
       dispatch(api.util.resetApiState());
-      router.replace("/login");
+      router.replace("/");
     }
   };
 

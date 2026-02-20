@@ -25,28 +25,12 @@ export type GetRecommendBooksResponse = {
 
 export type BookProgressItem = {
   startPage: number;
-  startReading: string; // ISO
+  startReading: string;
   finishPage?: number;
-  finishReading?: string; // ISO
+  finishReading?: string;
   speed?: number;
   status?: "active" | "inactive";
 };
-
-// export type UserBook = {
-//   _id: string;
-//   title: string;
-//   author: string;
-//   imageUrl: string | null;
-//   totalPages: number;
-//   status: "unread" | "in-progress" | "done";
-//   progress: BookProgressItem[];
-//   owner: string;
-//   timeLeftToRead?: {
-//     hours: number;
-//     minutes: number;
-//     seconds: number;
-//   };
-// };
 
 export type AddNewBookRequest = {
   title: string;
@@ -60,12 +44,11 @@ export type RemoveBookResponse = {
 };
 
 export type ReadingProgress = {
-  _id?: string; 
-  readingId?: string;
+  _id?: string;
   startPage: number;
   startReading: string;
   finishPage?: number;
-  finishReading?: string; 
+  finishReading?: string;
   speed?: number;
   status: "active" | "inactive";
 };
@@ -94,7 +77,6 @@ export type DeleteReadingRequest = { bookId: string; readingId: string };
 
 export const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
-
     getRecommended: builder.query<GetRecommendBooksResponse, GetRecommendQuery>(
       {
         query: ({ page, perPage, title, author }) => ({

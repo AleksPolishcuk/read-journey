@@ -11,7 +11,6 @@ function getMaxFinishedPage(book: UserBook) {
   for (const p of list) {
     if (typeof p.finishPage === "number") max = Math.max(max, p.finishPage);
   }
-  // якщо є active — можна теж врахувати як поточну верхню межу (але бек може не давати finishPage)
   return max;
 }
 

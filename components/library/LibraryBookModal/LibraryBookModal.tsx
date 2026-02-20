@@ -2,10 +2,13 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import toast from "react-hot-toast";
 
 import styles from "./LibraryBookModal.module.css";
 import { useGetBookByIdQuery } from "@/services/booksApi";
+
+const SIZES_MODAL = "(max-width: 767px) 160px, 160px";
 
 export function LibraryBookModal({
   bookId,
@@ -57,13 +60,16 @@ export function LibraryBookModal({
           <>
             <div className={styles.media}>
               {data.imageUrl ? (
-                <img
+                <Image
                   className={styles.cover}
                   src={data.imageUrl}
                   alt={data.title}
+                  width={160}
+                  height={220}
+                  sizes={SIZES_MODAL}
                 />
               ) : (
-                <div className={styles.coverStub} />
+                <div className={styles.coverStub} aria-hidden="true" />
               )}
             </div>
 

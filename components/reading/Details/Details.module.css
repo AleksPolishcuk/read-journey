@@ -5,7 +5,6 @@
   padding: 16px;
 }
 
-/* Header row: "Diary"/"Statistics" + icons справа */
 .head {
   display: flex;
   align-items: center;
@@ -22,7 +21,6 @@
   letter-spacing: -0.02em;
 }
 
-/* icons справа як на макеті */
 .tools {
   display: flex;
   align-items: center;
@@ -59,7 +57,6 @@
   cursor: not-allowed;
 }
 
-/* “внутрішня” панель з контентом */
 .body {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 16px;

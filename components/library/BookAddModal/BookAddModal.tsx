@@ -31,8 +31,7 @@ export function CreateBookSuccessModal({ onClose }: { onClose: () => void }) {
         </div>
         <h3 className={styles.title}>Good job</h3>
         <p className={styles.text}>
-          Your book is now in the library! The joy knows no bounds and now you
-          can start your training.
+          The book was added to your library. You can start reading anytime.
         </p>
       </div>
     </div>

@@ -42,7 +42,13 @@ export function Diary({
   }, [book.progress]);
 
   const onDelete = async (p: ReadingProgress) => {
-    const readingId = p._id ?? p.readingId ?? p.startReading;
+    const readingId = p._id;
+
+    if (!readingId) {
+      toast.error("Reading entry id is missing");
+      return;
+    }
+
     try {
       await del({ bookId: book._id, readingId }).unwrap();
       toast.success("Deleted");
@@ -68,7 +74,7 @@ export function Diary({
 
         return (
           <li
-            key={p._id ?? p.readingId ?? p.startReading}
+            key={p._id ?? `${p.startReading}-${p.startPage}`}
             className={styles.item}
           >
             <div className={styles.left}>
@@ -95,7 +101,7 @@ export function Diary({
                   type="button"
                   className={styles.trash}
                   onClick={() => onDelete(p)}
-                  disabled={isLoading}
+                  disabled={isLoading || !p._id}
                   aria-label="Delete reading entry"
                 >
                   <svg width="16" height="16">

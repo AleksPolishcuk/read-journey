@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import toast from "react-hot-toast";
 import styles from "./BookModal.module.css";
 import {
   useAddFromRecommendedMutation,
   useGetBookByIdQuery,
 } from "@/services/booksApi";
+
+const SIZES_MODAL = "(max-width: 767px) 140px, 160px";
 
 export function BookModal({
   bookId,
@@ -70,9 +73,16 @@ export function BookModal({
           <>
             <div className={styles.media}>
               {cover ? (
-                <img className={styles.cover} src={cover} alt={data.title} />
+                <Image
+                  className={styles.cover}
+                  src={cover}
+                  alt={data.title}
+                  width={140}
+                  height={214}
+                  sizes={SIZES_MODAL}
+                />
               ) : (
-                <div className={styles.coverStub} />
+                <div className={styles.coverStub} aria-hidden="true" />
               )}
             </div>
 

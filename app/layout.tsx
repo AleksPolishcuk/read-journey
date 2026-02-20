@@ -6,6 +6,9 @@ import { Toaster } from "react-hot-toast";
 export const metadata: Metadata = {
   title: "Read Journey",
   description: "Read Journey App",
+  icons: {
+    icon: [{ url: "/icon.png" }],
+  },
 };
 
 export default function RootLayout({

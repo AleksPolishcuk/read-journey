@@ -4,7 +4,6 @@
   gap: 6px;
   min-width: 0;
 
-  /* ключове: однакова висота всіх карток */
   height: 260px;
 }
 
@@ -36,7 +35,6 @@
   font-size: 12px;
   font-weight: var(--fw-700);
 
-  /* завжди 2 рядки по висоті */
   line-height: 1.25;
   min-height: calc(12px * 1.25 * 2);
 
@@ -52,7 +50,6 @@
   color: rgba(249, 249, 249, 0.45);
   font-family: var(--second-family);
 
-  /* завжди 1 рядок по висоті */
   line-height: 1.2;
   min-height: calc(10px * 1.2);
 

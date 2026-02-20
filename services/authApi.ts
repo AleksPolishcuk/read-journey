@@ -25,7 +25,6 @@ export type RegisterRequest = {
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // REGISTER
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (body) => ({
         url: "/users/signup",
@@ -35,7 +34,6 @@ export const authApi = api.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
 
-    // LOGIN
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (body) => ({
         url: "/users/signin",
@@ -45,7 +43,6 @@ export const authApi = api.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
 
-    // GET CURRENT USER
     getCurrentUser: builder.query<User, void>({
       query: () => ({
         url: "/users/current",
@@ -54,7 +51,6 @@ export const authApi = api.injectEndpoints({
       providesTags: ["Auth"],
     }),
 
-    // REFRESH TOKEN
     refreshToken: builder.query<AuthResponse, void>({
       query: () => ({
         url: "/users/current/refresh",
@@ -62,7 +58,6 @@ export const authApi = api.injectEndpoints({
       }),
     }),
 
-    // LOGOUT
     logout: builder.mutation<void, void>({
       query: () => ({
         url: "/users/signout",

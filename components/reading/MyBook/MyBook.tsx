@@ -1,6 +1,6 @@
-// components/reading/MyBook/MyBook.tsx
 "use client";
 
+import Image from "next/image";
 import styles from "./MyBook.module.css";
 import type { UserBook, ReadingProgress } from "@/services/booksApi";
 
@@ -10,6 +10,8 @@ function formatLeft(t?: { hours: number; minutes: number; seconds: number }) {
   const m = t.minutes ?? 0;
   return `${h} hours and ${m} minutes left`;
 }
+
+const SIZES_MYBOOK = "(max-width: 767px) 146px, 160px";
 
 export function MyBook({
   book,
@@ -31,13 +33,16 @@ export function MyBook({
       <div className={styles.body}>
         <div className={styles.media}>
           {book.imageUrl ? (
-            <img
+            <Image
               className={styles.cover}
               src={book.imageUrl}
               alt={book.title}
+              width={146}
+              height={220}
+              sizes={SIZES_MYBOOK}
             />
           ) : (
-            <div className={styles.stub} />
+            <div className={styles.stub} aria-hidden="true" />
           )}
         </div>
 

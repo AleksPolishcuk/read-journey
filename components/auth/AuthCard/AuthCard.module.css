@@ -1,14 +1,36 @@
 .page {
-  min-height: 100vh;
-  padding: 20px;
   display: flex;
   justify-content: center;
-  background: var(--c-bg);
 }
 
 .stack {
-  width: min(var(--container-mobile), calc(100% - 40px));
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: var(--page-pad-tablet);
+  }
+
+  .stack {
+    width: min(
+      var(--container-tablet),
+      calc(100% - (var(--page-pad-tablet) * 2))
+    );
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding: var(--page-pad-desktop);
+  }
+
+  .stack {
+    width: min(
+      var(--container-desktop),
+      calc(100% - (var(--page-pad-desktop) * 2))
+    );
+  }
 }

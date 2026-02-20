@@ -1,0 +1,5 @@
+.page {
+  min-height: 100vh;
+  padding: var(--page-pad);
+  padding-bottom: var(--page-pad);
+}

@@ -1,4 +1,3 @@
-// components/reading/BookReadModal/BookReadModal.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -32,8 +31,7 @@ export function BookReadModal({ onClose }: { onClose: () => void }) {
         </div>
         <h3 className={styles.title}>The book is read</h3>
         <p className={styles.text}>
-          It was an exciting journey, where each page revealed new horizons, and
-          the characters became inseparable friends.
+          You finished the book. The reading progress has been saved.
         </p>
       </div>
     </div>

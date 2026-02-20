@@ -1,13 +1,8 @@
 .page {
   min-height: 100vh;
-  padding: 20px;
-  background: var(--c-bg);
-  display: flex;
-  justify-content: center;
 }
 
-.container {
-  width: min(var(--container-mobile), calc(100% - 40px));
+.stack {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -24,4 +19,30 @@
   font-size: 12px;
   color: rgba(249, 249, 249, 0.55);
   font-family: var(--second-family);
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: var(--page-pad-tablet);
+  }
+
+  .container {
+    width: min(
+      var(--container-tablet),
+      calc(100% - (var(--page-pad-tablet) * 2))
+    );
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding: var(--page-pad-desktop);
+  }
+
+  .container {
+    width: min(
+      var(--container-desktop),
+      calc(100% - (var(--page-pad-desktop) * 2))
+    );
+  }
 }

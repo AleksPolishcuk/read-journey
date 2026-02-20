@@ -3,6 +3,9 @@
 import { useState } from "react";
 import styles from "./Header.module.css";
 import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
+import { UserNav } from "../UserNav/UserNav";
+import { LogoutButton } from "../LogoutButton/LogoutButton";
+import { UserBar } from "../UserBar/UserBar";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,16 +13,30 @@ export function Header() {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>
-          <svg width="42" height="18" aria-hidden="true">
-            <use href="/sprite.svg#icon-Logo_small" />
-          </svg>
+        <div className={styles.left}>
+          <div className={styles.logo} aria-label="ReadJourney">
+            <svg width="42" height="18" aria-hidden="true">
+              <use href="/sprite.svg#icon-Logo_small" />
+            </svg>
+          </div>
+
+          <div className={styles.navInline}>
+            <UserNav />
+          </div>
         </div>
 
-        <div className={styles.actions}>
-          <button className={styles.userBtn} type="button" aria-label="User">
-            <span className={styles.userDot} />
-          </button>
+        <div className={styles.right}>
+          <div className={styles.userFull}>
+            <UserBar variant="full" />
+          </div>
+
+          <div className={styles.userCompact}>
+            <UserBar variant="compact" />
+          </div>
+
+          <div className={styles.logoutInline}>
+            <LogoutButton />
+          </div>
 
           <button
             className={styles.burgerBtn}

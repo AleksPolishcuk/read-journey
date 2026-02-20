@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import toast from "react-hot-toast";
 
 import styles from "./MyLibraryBooks.module.css";
@@ -11,11 +12,15 @@ import {
 } from "@/services/booksApi";
 
 type StatusFilter = "all" | "unread" | "in-progress" | "done";
+
 function truncate13(s: string) {
   const clean = (s ?? "").trim();
   if (clean.length <= 11) return clean;
   return clean.slice(0, 11) + "…";
 }
+
+const SIZES_LIBRARY_GRID =
+  "(max-width: 374px) 50vw, (max-width: 767px) 160px, (max-width: 1439px) 180px, 208px";
 
 export function MyLibraryBooks({
   onOpenBook,
@@ -86,9 +91,16 @@ export function MyLibraryBooks({
               aria-label={`Open ${b.title}`}
             >
               {b.imageUrl ? (
-                <img className={styles.cover} src={b.imageUrl} alt={b.title} />
+                <Image
+                  className={styles.cover}
+                  src={b.imageUrl}
+                  alt={b.title}
+                  width={208}
+                  height={208}
+                  sizes={SIZES_LIBRARY_GRID}
+                />
               ) : (
-                <div className={styles.stub} />
+                <div className={styles.stub} aria-hidden="true" />
               )}
             </button>
 

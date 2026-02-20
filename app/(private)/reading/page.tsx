@@ -1,4 +1,3 @@
-// app/reading/page.tsx
 "use client";
 
 import { useMemo, useState } from "react";
@@ -6,7 +5,8 @@ import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 import { AuthGuard } from "@/components/auth/AuthGuard/AuthGuard";
-import { Header } from "@/components/layout/Header/Header";
+import { PageShell } from "@/components/common/PageShell/PageShell";
+import { Container } from "@/components/common/Container/Container";
 
 import styles from "./reading.module.css";
 
@@ -43,7 +43,6 @@ export default function ReadingPage() {
 
   const activeEntry = useMemo<ReadingProgress | undefined>(() => {
     const list = book?.progress ?? [];
-
     for (let i = list.length - 1; i >= 0; i -= 1) {
       if (list[i].status === "active") return list[i];
     }
@@ -77,44 +76,50 @@ export default function ReadingPage() {
 
   return (
     <AuthGuard>
-      <main className={styles.page}>
-        <div className={styles.container}>
-          <Header />
+      <PageShell className={styles.page}>
+        <Container>
+          <div className={styles.stack}>
+            {/* Header у (private)/layout.tsx */}
 
-          <section className={styles.dashboardCard}>
-            {isLoading ? <p className={styles.state}>Loading...</p> : null}
-            {isError ? (
-              <p className={styles.state}>Failed to load book</p>
-            ) : null}
+            <section className={styles.dashboardCard}>
+              {isLoading ? <p className={styles.state}>Loading...</p> : null}
+              {isError ? (
+                <p className={styles.state}>Failed to load book</p>
+              ) : null}
+
+              {book ? (
+                <>
+                  <AddReadingForm
+                    maxPages={maxPages}
+                    isActive={isActive}
+                    isSubmitting={isStarting || isFinishing}
+                    onSubmitPage={onSubmitPage}
+                  />
+
+                  <Details
+                    mode={mode}
+                    onChangeMode={setMode}
+                    book={book}
+                    totalPages={book.totalPages}
+                  />
+                </>
+              ) : null}
+            </section>
 
             {book ? (
-              <>
-                <AddReadingForm
-                  maxPages={maxPages}
-                  isActive={isActive}
-                  isSubmitting={isStarting || isFinishing}
-                  onSubmitPage={onSubmitPage}
-                />
-
-                <Details
-                  mode={mode}
-                  onChangeMode={setMode}
-                  book={book}
-                  totalPages={book.totalPages}
-                />
-              </>
+              <MyBook
+                book={book}
+                isActive={isActive}
+                activeEntry={activeEntry}
+              />
             ) : null}
-          </section>
-
-          {book ? (
-            <MyBook book={book} isActive={isActive} activeEntry={activeEntry} />
-          ) : null}
-        </div>
+          </div>
+        </Container>
 
         {readModalOpen ? (
           <BookReadModal onClose={() => setReadModalOpen(false)} />
         ) : null}
-      </main>
+      </PageShell>
     </AuthGuard>
   );
 }

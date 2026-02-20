@@ -54,14 +54,40 @@
   --bp-768: 768px;
   --bp-1440: 1440px;
 
-  /* --container-mobile: 335px; */
-  --container-1440: 1440px;
+  --page-pad: 20px;
+
+  --container-max: 100%;
+
+  --container-375: 335px;
+
+  --container-768: 704px;
+
+  --container-1440: 1240px;
+}
+
+@media (min-width: 375px) {
+  :root {
+    --container-max: var(--container-375);
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-max: var(--container-768);
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --container-max: var(--container-1440);
+  }
 }
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   background: var(--c-bg);
@@ -69,15 +95,18 @@ body {
   font-family: var(--font-family);
   font-weight: var(--fw-500);
 }
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 a {
   color: inherit;
   text-decoration: none;
 }
+
 button,
 input,
 select,
