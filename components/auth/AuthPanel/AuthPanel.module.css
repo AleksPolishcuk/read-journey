@@ -3,3 +3,19 @@
   border-radius: 30px;
   padding: 20px 20px 40px;
 }
+
+@media (min-width: 768px) {
+  .card {
+    min-height: 960px;
+    padding: 40px 168px 64px 64px;
+    margin: 32px 0 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    padding: 40px 64px 64px 64px;
+    margin: 32px 0 32px;
+    min-height: 732px;
+  }
+}

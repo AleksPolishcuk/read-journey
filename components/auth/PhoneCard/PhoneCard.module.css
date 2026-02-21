@@ -12,6 +12,18 @@
 .img {
   width: 100%;
   height: auto;
+}
 
-  border-radius: none;
+/* desktop — як у макеті: окрема card справа з округленням */
+@media (min-width: 1440px) {
+  .card {
+    padding: 80px 98px 0 98px;
+    margin: 32px 0 32px 0;
+    max-width: 600px;
+    max-height: 736px;
+  }
+
+  .img {
+    border-radius: 12px;
+  }
 }

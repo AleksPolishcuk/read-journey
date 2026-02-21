@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PublicOnly } from "@/components/auth/PublicOnly/PublicOnly";
 import { AuthCard } from "@/components/auth/AuthCard/AuthCard";
 import { PhonePreview } from "@/components/auth/PhoneCard/PhoneCard";
+import { OnlyMobileAndDesktop } from "@/components/common/Responsive/OnlyMobileAndDesktop";
 
 import styles from "./welcome.module.css";
 
@@ -17,9 +18,8 @@ export default function WelcomePage() {
           </div>
 
           <h1 className={styles.title}>
-            Expand your mind,
-            <br />
-            reading <span className={styles.muted}>a book</span>
+            Expand your mind, reading <br />
+            <span className={styles.muted}>a book</span>
           </h1>
 
           <p className={styles.text}>
@@ -37,7 +37,9 @@ export default function WelcomePage() {
           </div>
         </section>
 
-        <PhonePreview />
+        <OnlyMobileAndDesktop>
+          <PhonePreview />
+        </OnlyMobileAndDesktop>
       </AuthCard>
     </PublicOnly>
   );

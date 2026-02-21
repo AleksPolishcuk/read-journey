@@ -4,6 +4,7 @@ import { AuthPanel } from "@/components/auth/AuthPanel/AuthPanel";
 import { AuthHeading } from "@/components/auth/AuthHeading/AuthHeading";
 import { RegisterForm } from "@/components/auth/RegisterForm/RegisterForm";
 import { PhonePreview } from "@/components/auth/PhoneCard/PhoneCard";
+import { OnlyMobileAndDesktop } from "@/components/common/Responsive/OnlyMobileAndDesktop";
 
 export default function RegisterPage() {
   return (
@@ -14,7 +15,9 @@ export default function RegisterPage() {
           <RegisterForm />
         </AuthPanel>
 
-        <PhonePreview />
+        <OnlyMobileAndDesktop>
+          <PhonePreview />
+        </OnlyMobileAndDesktop>
       </AuthCard>
     </PublicOnly>
   );

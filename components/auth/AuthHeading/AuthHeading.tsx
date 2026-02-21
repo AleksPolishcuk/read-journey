@@ -1,19 +1,25 @@
-import React from "react";
 import styles from "./AuthHeading.module.css";
 
 export function AuthHeading() {
   return (
     <div className={styles.wrap}>
       <div className={styles.logo}>
-        <svg width="48" height="18">
+        {/* mobile logo */}
+        <svg className={styles.logoMobile} width="48" height="18">
           <use href="/sprite.svg#icon-Logo_small" />
+        </svg>
+
+        {/* tablet + desktop logo */}
+        <svg className={styles.logoDesktop} width="182" height="17">
+          <use href="/sprite.svg#icon-Logo" />
         </svg>
       </div>
 
       <h1 className={styles.title}>
         Expand your mind,
-        <br />
-        reading <span className={styles.muted}>a book</span>
+        {/* <br /> */}
+        reading <br />
+        <span className={styles.muted}>a book</span>
       </h1>
     </div>
   );

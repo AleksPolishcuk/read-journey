@@ -80,3 +80,51 @@
   color: var(--c-black);
   transition: background 0.2s ease;
 }
+
+@media (min-width: 768px) {
+  .panel {
+    width: var(--container-768);
+    padding: 40px 64px 64px;
+    margin: 32px auto 32px;
+  }
+
+  .title {
+    font-size: 64px;
+  }
+
+  .text {
+    font-size: 14px;
+    max-width: 430px;
+  }
+
+  .actions {
+    margin-top: 60px;
+  }
+
+  .primaryBtn {
+    padding: 16px 54px;
+  }
+
+  .secondaryBtn {
+    padding: 16px 54px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .panel {
+    width: 600px;
+    min-height: 736px;
+  }
+
+  .title {
+    margin-top: 120px;
+  }
+
+  .actions {
+    gap: 20px;
+    margin-top: 80px;
+  }
+  .text {
+    font-size: 16px;
+  }
+}

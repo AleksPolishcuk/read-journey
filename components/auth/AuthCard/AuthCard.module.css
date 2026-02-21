@@ -9,6 +9,7 @@
   gap: 12px;
 }
 
+/* tablet */
 @media (min-width: 768px) {
   .page {
     padding: var(--page-pad-tablet);
@@ -22,6 +23,7 @@
   }
 }
 
+/* desktop */
 @media (min-width: 1440px) {
   .page {
     padding: var(--page-pad-desktop);
@@ -32,5 +34,10 @@
       var(--container-desktop),
       calc(100% - (var(--page-pad-desktop) * 2))
     );
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
   }
 }
