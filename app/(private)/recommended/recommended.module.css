@@ -3,6 +3,7 @@
   justify-content: center;
 }
 
+/* MOBILE (320-767): як у тебе зараз — стек */
 .stack {
   display: flex;
   flex-direction: column;
@@ -67,7 +68,7 @@
   line-height: 1.33;
   letter-spacing: -0.02em;
   font-family: var(--second-family);
-  color: rgba(249, 249, 249, 0.55);
+  color: var(--c-gray);
 }
 
 .myLibraryRow {
@@ -145,8 +146,8 @@
 .state {
   margin: 12px 0 0;
   font-size: 12px;
-  color: rgba(249, 249, 249, 0.55);
-  font-family: var(--second-family);
+  color: var(--c-gray);
+  font-family: var(--font-family);
 }
 
 .booksGrid {
@@ -157,22 +158,127 @@
   max-height: 260px;
   overflow: hidden;
 }
+.quoteCard {
+  display: none;
+}
 
 @media (min-width: 768px) {
+  .stack {
+    gap: 16px;
+  }
+
+  .dashboardCard {
+    padding: 32px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .infoCard {
+    margin-top: 0;
+    height: 100%;
+  }
+
+  .infoTitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+    font-size: 20px;
+  }
+
+  .stepNum {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .stepText {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  .steps {
+    gap: 20px;
+  }
+
+  .myLibraryRow {
+    margin-top: 26px;
+  }
+
+  .myLibraryLink {
+    font-size: 14px;
+  }
+
+  .booksCard {
+    padding: 40px 40px;
+  }
+
   .booksGrid {
     max-height: none;
+    overflow: visible;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 }
 
 @media (min-width: 1440px) {
-  .page {
-    padding: var(--page-pad-desktop);
+  .stack {
+    display: grid;
+    grid-template-columns: 353px 1fr;
+    gap: 16px;
+    align-items: start;
   }
 
-  .container {
-    width: min(
-      var(--container-desktop),
-      calc(100% - (var(--page-pad-desktop) * 2))
-    );
+  .dashboardCard {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 40px 20px 20px 20px;
+    position: sticky;
+    top: 20px;
+  }
+
+  .booksCard {
+    padding: 40px 40px;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .quoteCard {
+    display: block;
+    margin-top: 14px;
+    background: var(--c-input-bg);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+
+  .quoteInner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .quoteIcon {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+  }
+
+  .quoteText {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: var(--fw-500);
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    color: var(--c-gray);
+  }
+
+  .quoteWorld {
+    color: var(--c-text);
+    font-weight: var(--fw-700);
   }
 }

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { hydrateAuth } from "@/redux/features/authSlice";
 import { selectIsAuth, selectIsHydrated } from "@/redux/features/selectors";
 

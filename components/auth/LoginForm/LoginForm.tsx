@@ -11,7 +11,7 @@ import styles from "./LoginForm.module.css";
 import { Input } from "@/components/common/Input/Input";
 import { loginValidationSchema } from "@/lib/validation/authSchemas";
 import { useLoginMutation } from "@/services/authApi";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import { setCredentials } from "@/redux/features/authSlice";
 
 type FormValues = {

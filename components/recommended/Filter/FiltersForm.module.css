@@ -60,3 +60,30 @@
   font-size: 12px;
   cursor: pointer;
 }
+
+@media (min-width: 768px) {
+  .filtersTitle {
+    font-size: 14px;
+    font-weight: var(--fw-500);
+    margin-left: 14px;
+  }
+
+  .field {
+    padding: 16px 14px;
+  }
+  .fieldLabel {
+    font-size: 14px;
+  }
+
+  .fieldInput {
+    font-size: 14px;
+    padding: 0;
+  }
+
+  .applyBtn {
+    height: 42px;
+    padding: 0 28px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

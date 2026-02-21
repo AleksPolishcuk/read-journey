@@ -68,18 +68,21 @@
 @media (min-width: 375px) {
   :root {
     --container-max: var(--container-375);
+    --bp-index: 0;
   }
 }
 
 @media (min-width: 768px) {
   :root {
     --container-max: var(--container-768);
+    --bp-index: 1;
   }
 }
 
 @media (min-width: 1440px) {
   :root {
     --container-max: var(--container-1440);
+    --bp-index: 2;
   }
 }
 

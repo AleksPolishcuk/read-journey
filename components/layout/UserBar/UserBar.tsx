@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./UserBar.module.css";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/lib/hooks/hooks";
 import { selectUser } from "@/redux/features/selectors";
 
 function getInitial(name?: string | null) {

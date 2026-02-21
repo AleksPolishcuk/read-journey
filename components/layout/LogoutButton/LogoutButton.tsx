@@ -3,7 +3,7 @@
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useLogoutMutation } from "@/services/authApi";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import { clearAuth } from "@/redux/features/authSlice";
 import { api } from "@/services/api";
 import styles from "./LogoutButton.module.css";
