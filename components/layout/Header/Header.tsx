@@ -13,38 +13,51 @@ export function Header() {
   return (
     <>
       <header className={styles.header}>
+        {/* LEFT */}
         <div className={styles.left}>
-          <div className={styles.logo} aria-label="ReadJourney">
+          {/* Mobile icon-only */}
+          <div className={styles.logoIcon} aria-label="ReadJourney">
             <svg width="42" height="18" aria-hidden="true">
               <use href="/sprite.svg#icon-Logo_small" />
             </svg>
           </div>
 
-          <div className={styles.navInline}>
-            <UserNav />
+          {/* Tablet/Desktop full logo */}
+          <div className={styles.logoFull} aria-label="ReadJourney">
+            <svg width="182" height="20" aria-hidden="true">
+              <use href="/sprite.svg#icon-Logo" />
+            </svg>
           </div>
         </div>
 
+        {/* CENTER (tablet+desktop) */}
+        <div className={styles.center}>
+          <UserNav variant="inline" />
+        </div>
+
+        {/* RIGHT */}
         <div className={styles.right}>
-          <div className={styles.userFull}>
-            <UserBar variant="full" />
+          {/* tablet: only avatar; desktop: avatar + name */}
+          <div className={styles.userTablet}>
+            <UserBar variant="compact" />
           </div>
 
-          <div className={styles.userCompact}>
-            <UserBar variant="compact" />
+          <div className={styles.userDesktop}>
+            <UserBar variant="full" />
           </div>
 
           <div className={styles.logoutInline}>
             <LogoutButton />
           </div>
 
+          {/* mobile only */}
           <button
             className={styles.burgerBtn}
             type="button"
             aria-label="Open menu"
             onClick={() => setIsOpen(true)}
           >
-            <svg width="28" height="28">
+            <svg width="28" height="28" aria-hidden="true">
               <use href="/sprite.svg#icon-menu-04" />
             </svg>
           </button>

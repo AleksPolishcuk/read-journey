@@ -5,26 +5,38 @@
   gap: 18px;
 }
 
+/* inline (tablet/desktop) */
+.inline {
+  flex-direction: row;
+  gap: 32px;
+}
+
 .link {
   font-family: var(--second-family);
   font-size: 14px;
   color: rgba(249, 249, 249, 0.35);
   position: relative;
+
+  /* важливо для underline по ширині тексту */
+  display: inline-block;
+  padding-bottom: 6px;
 }
 
 .active {
   color: var(--c-text);
 }
 
+/* underline на всю ширину назви лінку */
 .active::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -6px;
+  bottom: 0;
+
   height: 2px;
-  margin: 0 auto;
-  width: 34px;
+  width: 100%;
+
   background: #3b82f6;
   border-radius: 2px;
 }

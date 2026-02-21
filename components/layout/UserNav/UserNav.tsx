@@ -4,11 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./UserNav.module.css";
 
-export function UserNav({ onNavigate }: { onNavigate?: () => void }) {
+export function UserNav({
+  onNavigate,
+  variant = "stack",
+}: {
+  onNavigate?: () => void;
+  variant?: "stack" | "inline";
+}) {
   const pathname = usePathname();
 
   return (
-    <nav className={styles.nav}>
+    <nav
+      className={`${styles.nav} ${variant === "inline" ? styles.inline : ""}`}
+    >
       <Link
         className={`${styles.link} ${
           pathname === "/recommended" ? styles.active : ""
@@ -20,9 +28,7 @@ export function UserNav({ onNavigate }: { onNavigate?: () => void }) {
       </Link>
 
       <Link
-        className={`${styles.link} ${
-          pathname === "/library" ? styles.active : ""
-        }`}
+        className={`${styles.link} ${pathname === "/library" ? styles.active : ""}`}
         href="/library"
         onClick={onNavigate}
       >

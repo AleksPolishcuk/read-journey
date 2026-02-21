@@ -2,7 +2,7 @@
   height: 40px;
   padding: 0 20px;
   border-radius: 30px;
-  border: 1px solid var(--c-gray);
+  border: 1px solid var(--c-border);
   background: transparent;
   color: var(--c-text);
   font-family: var(--font-family);
@@ -16,4 +16,11 @@
   background: var(--c-text);
   color: var(--c-black);
   transition: background 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 0 28px;
+    font-size: 16px;
+  }
 }
