@@ -59,7 +59,7 @@ export function AddBookForm({ onCreated }: { onCreated: () => void }) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <p className={styles.label}>Filters:</p>
+      <p className={styles.label}>Create your library:</p>
 
       <Input
         label="Book title"

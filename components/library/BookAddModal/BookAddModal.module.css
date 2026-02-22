@@ -33,8 +33,6 @@
 }
 
 .icon {
-  font-size: 40px;
-  line-height: 1;
   margin-top: 10px;
 }
 
@@ -51,4 +49,17 @@
   font-family: var(--second-family);
   color: rgba(249, 249, 249, 0.55);
   max-width: 260px;
+}
+
+/* tablet/desktop modal width like макет */
+@media (min-width: 768px) {
+  .modal {
+    width: 500px;
+    border-radius: 16px;
+    padding: 40px 40px;
+  }
+
+  .text {
+    max-width: 320px;
+  }
 }

@@ -123,3 +123,22 @@
   color: var(--c-black);
   transition: background 0.2s ease;
 }
+
+/* tablet/desktop modal size like макет */
+@media (min-width: 768px) {
+  .modal {
+    width: 500px;
+    padding: 40px;
+    border-radius: 16px;
+  }
+
+  .cover,
+  .coverStub {
+    width: 200px;
+    border-radius: 12px;
+  }
+
+  .btn {
+    width: 160px;
+  }
+}

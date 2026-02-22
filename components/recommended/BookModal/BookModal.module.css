@@ -127,3 +127,44 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+@media (min-width: 768px) {
+  .modal {
+    width: min(500px, 100%);
+  }
+
+  .media {
+    margin-top: 48px;
+  }
+
+  .cover,
+  .coverStub {
+    width: 180px;
+    height: 276px;
+  }
+
+  .info {
+    margin-top: 24px;
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 20px;
+    max-width: none;
+  }
+
+  .author {
+    font-size: 14px;
+    max-width: none;
+  }
+
+  .pages {
+    font-size: 10px;
+  }
+  .btn {
+    min-width: 162px;
+    font-size: 16px;
+    padding: 14px 28px;
+    margin: 46px 0 50px;
+  }
+}

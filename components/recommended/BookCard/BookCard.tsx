@@ -7,15 +7,22 @@ import type { RecommendedBook } from "@/services/booksApi";
 const SIZES_RECOMMENDED_GRID =
   "(max-width: 374px) 50vw, (max-width: 767px) 160px, (max-width: 1439px) 180px, 190px";
 
+const SIZES_RECOMMENDED_STRIP =
+  "(max-width: 374px) 30vw, (max-width: 767px) 90px, (max-width: 1439px) 110px, 120px";
+
 export function BookCard({
   book,
   onOpen,
+  variant = "grid",
 }: {
   book: RecommendedBook;
   onOpen: (id: string) => void;
+  variant?: "grid" | "strip";
 }) {
+  const isStrip = variant === "strip";
+
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${isStrip ? styles.strip : ""}`}>
       <button
         className={styles.coverBtn}
         type="button"
@@ -27,9 +34,9 @@ export function BookCard({
             className={styles.coverImg}
             src={book.imageUrl}
             alt={book.title}
-            width={190}
-            height={260}
-            sizes={SIZES_RECOMMENDED_GRID}
+            width={isStrip ? 120 : 190}
+            height={isStrip ? 107 : 260}
+            sizes={isStrip ? SIZES_RECOMMENDED_STRIP : SIZES_RECOMMENDED_GRID}
             priority={false}
           />
         ) : (

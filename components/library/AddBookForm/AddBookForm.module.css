@@ -16,8 +16,9 @@
 
 .submit {
   margin-top: 10px;
-  height: 40px;
-  width: 140px;
+  height: 38px;
+  width: 106px;
+
   border-radius: 30px;
   border: 1px solid rgba(249, 249, 249, 0.18);
   background: transparent;
@@ -36,4 +37,17 @@
 .submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .label {
+    font-size: 14px;
+  }
+
+  .submit {
+    width: 130px;
+    min-height: 42px;
+    font-size: 16px;
+    margin-top: 12px;
+  }
 }

@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 6px;
   min-width: 0;
-
   height: 260px;
 }
 
@@ -34,7 +33,6 @@
   margin: 0;
   font-size: 12px;
   font-weight: var(--fw-700);
-
   line-height: 1.25;
   min-height: calc(12px * 1.25 * 2);
 
@@ -49,11 +47,36 @@
   font-size: 10px;
   color: rgba(249, 249, 249, 0.45);
   font-family: var(--second-family);
-
   line-height: 1.2;
   min-height: calc(10px * 1.2);
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.strip {
+  height: auto;
+  gap: 6px;
+}
+
+.strip .coverImg,
+.strip .coverStub {
+  height: 107px;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .strip .coverImg,
+  .strip .coverStub {
+    width: 72px;
+    height: 107px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .coverImg,
+  .coverStub {
+    width: 138px;
+    height: 208px;
+  }
 }

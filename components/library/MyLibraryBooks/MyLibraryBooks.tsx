@@ -22,6 +22,8 @@ function truncate13(s: string) {
 const SIZES_LIBRARY_GRID =
   "(max-width: 374px) 50vw, (max-width: 767px) 160px, (max-width: 1439px) 180px, 208px";
 
+const SIZES_EMPTY = "(max-width: 767px) 90px, (max-width: 1439px) 110px, 130px";
+
 export function MyLibraryBooks({
   onOpenBook,
 }: {
@@ -71,12 +73,22 @@ export function MyLibraryBooks({
 
       {list.length === 0 && !isLoading ? (
         <div className={styles.empty}>
-          <div className={styles.emoji} aria-hidden="true">
-            📚
+          <div className={styles.emptyImg}>
+            <Image
+              src="/images/books@2x.png"
+              alt=""
+              width={70}
+              height={70}
+              sizes={SIZES_EMPTY}
+              priority={false}
+            />
           </div>
+
           <p className={styles.emptyText}>
-            To start training, add some of your books or from the{" "}
-            <b>recommended</b> ones
+            To start training, add{" "}
+            <span className={styles.emptySpan}>some of your books</span> or{" "}
+            <br />
+            from the recommended ones
           </p>
         </div>
       ) : null}
