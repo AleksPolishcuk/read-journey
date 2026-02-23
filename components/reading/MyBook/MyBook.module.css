@@ -1,7 +1,7 @@
 .card {
   background: var(--c-black);
   border-radius: var(--radius-xl);
-  padding: 16px;
+  padding: 40px 20px;
 }
 
 .head {
@@ -24,9 +24,12 @@
 }
 
 .body {
-  margin-top: 12px;
-  display: grid;
-  justify-items: center;
+  max-width: 146px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
   text-align: center;
 }
 
@@ -36,10 +39,10 @@
 
 .cover,
 .stub {
-  width: 146px;
-  height: 220px;
-  border-radius: 12px;
-  object-fit: cover;
+  width: 138px;
+  height: 208px;
+  border-radius: 8px;
+  object-fit: fill;
   display: block;
 }
 
@@ -49,9 +52,9 @@
 
 .name {
   margin: 10px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: var(--fw-700);
-  max-width: 240px;
+  /* max-width: 240px; */
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -72,28 +75,90 @@
 }
 
 .indicatorWrap {
-  margin-top: 14px;
-  margin-bottom: 6px;
+  margin-top: 20px;
 }
 
 .indicator {
   width: 46px;
   height: 46px;
   border-radius: 999px;
-  border: 2px solid rgba(249, 249, 249, 0.35);
+  border: 2px solid var(--c-text);
   display: grid;
   place-items: center;
 }
 
 .inner {
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
-  background: #e90516;
+  background: var(--c-error);
 }
 
 .active .inner {
   width: 18px;
   height: 18px;
   border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 40px 40px 24px 40px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .body {
+    min-width: 400px;
+    margin-top: 32px;
+  }
+
+  .left {
+    font-size: 14px;
+  }
+
+  .cover,
+  .stub {
+    min-width: 168px;
+    min-height: 256px;
+  }
+
+  .name {
+    margin-top: 24px;
+    font-size: 20px;
+  }
+
+  .author {
+    font-size: 14px;
+  }
+
+  .indicatorWrap {
+    margin-top: 16px;
+  }
+
+  .indicator {
+    width: 50px;
+    height: 50px;
+  }
+
+  .inner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    min-height: 650px;
+    padding-bottom: 52px;
+    display: grid;
+    align-content: start;
+  }
+
+  .cover,
+  .stub {
+    width: 224px;
+    height: 340px;
+  }
 }

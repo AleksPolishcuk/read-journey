@@ -33,8 +33,19 @@
 }
 
 .icon {
-  font-size: 40px;
-  line-height: 1;
+  width: 68px;
+  height: 68px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+
+  background-image: image-set(
+    url("/images/books.png") 1x,
+    url("/images/books@2x.png") 2x
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 44px 44px;
+
   margin-top: 10px;
 }
 
@@ -51,4 +62,10 @@
   font-family: var(--second-family);
   color: rgba(249, 249, 249, 0.55);
   max-width: 260px;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: min(342px, 100%);
+  }
 }

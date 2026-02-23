@@ -30,7 +30,7 @@
 
 .recCard {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: var(--radius-lg);
+  border-radius: 8px;
   padding: 14px;
 }
 
@@ -60,7 +60,7 @@
   margin-top: 12px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -115,6 +115,7 @@
 
   .dashboardCard {
     padding: 40px 20px 20px 20px;
+    min-height: 650px;
   }
 
   .dashboardGrid {

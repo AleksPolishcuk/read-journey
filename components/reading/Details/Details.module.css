@@ -1,16 +1,26 @@
 .card {
-  margin-top: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  margin-top: 24px;
   border-radius: 16px;
-  padding: 16px;
+  padding: 16px 0 20px 0;
 }
 
 .head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 14px;
+}
+
+.text {
+  display: none;
+  margin: 0 0 20px 0;
+
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(249, 249, 249, 0.55);
+  font-family: var(--font-family);
 }
 
 .title {
@@ -21,13 +31,13 @@
   letter-spacing: -0.02em;
 }
 
-.tools {
+.tabs {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.toolBtn {
+.tabBtn {
   width: 34px;
   height: 34px;
   border-radius: 999px;
@@ -40,26 +50,86 @@
   color: rgba(249, 249, 249, 0.9);
 }
 
-.toolBtn svg {
+.tabBtn svg {
   opacity: 0.55;
 }
 
-.toolBtnActive {
+.active {
   border-color: rgba(249, 249, 249, 0.9);
 }
 
-.toolBtnActive svg {
+.active svg {
   opacity: 1;
 }
 
-.toolBtn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.text {
+  display: none;
 }
 
-.body {
+.progressBody {
+  display: grid;
+  gap: 20px;
+}
+
+.progressText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+
+  color: var(--c-gray);
+  font-family: var(--font-family);
+}
+
+.star {
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  padding: 14px;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto;
+  background-image: image-set(
+    url("/images/star.png") 1x,
+    url("/images/star@2x.png") 2x
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 34px 34px;
+}
+
+@media (min-width: 768px) {
+  .card {
+    margin-top: 0;
+    padding: 0px;
+    min-height: 255px;
+  }
+
+  .progressBody {
+    gap: 50px;
+    align-content: start;
+  }
+
+  .star {
+    width: 100px;
+    height: 100px;
+    background-size: 50px 50px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    padding: 20px 0;
+    min-height: 0;
+  }
+
+  .star {
+    width: 100px;
+    height: 100px;
+  }
+
+  .text {
+    display: block;
+  }
 }

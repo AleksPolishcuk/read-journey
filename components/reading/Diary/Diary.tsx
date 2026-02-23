@@ -64,20 +64,31 @@ export function Diary({
 
   return (
     <ul className={styles.list}>
-      {entries.map((p) => {
+      {entries.map((p, idx) => {
         const finish = p.finishPage ?? 0;
         const percent = totalPages
           ? Math.min(100, (finish / totalPages) * 100)
           : 0;
+
         const mins = minutesBetween(p.startReading, p.finishReading);
         const pagesRead = Math.max(0, (p.finishPage ?? 0) - p.startPage);
+        const isLast = idx === entries.length - 1;
 
         return (
           <li
             key={p._id ?? `${p.startReading}-${p.startPage}`}
             className={styles.item}
           >
-            <div className={styles.left}>
+            {/* timeline (квадратик + вертикальна лінія, не перекриває квадратик) */}
+            <div className={styles.tl} aria-hidden="true">
+              <div className={styles.square} />
+              <div
+                className={`${styles.line} ${isLast ? styles.lineLast : ""}`}
+              />
+            </div>
+
+            {/* main content */}
+            <div className={styles.content}>
               <div className={styles.rowTop}>
                 <span className={styles.date}>
                   {formatDate(p.startReading)}
@@ -85,18 +96,19 @@ export function Diary({
                 <span className={styles.pagesRight}>{pagesRead} pages</span>
               </div>
 
+              {/* % і час: час під відсотками */}
               <div className={styles.rowMid}>
-                <span className={styles.percent}>{percent.toFixed(1)}%</span>
-                <span className={styles.mins}>{mins} minutes</span>
+                <div className={styles.percentBlock}>
+                  <span className={styles.percent}>{percent.toFixed(1)}%</span>
+                  <span className={styles.mins}>{mins} minutes</span>
+                </div>
               </div>
+            </div>
 
-              <div className={styles.rowBot}>
-                <span className={styles.speed}>
-                  {typeof p.speed === "number"
-                    ? `${p.speed} pages per hour`
-                    : ""}
-                </span>
-
+            {/* right side: schedule + trash справа + speed під графіком */}
+            <div className={styles.right}>
+              <div className={styles.rightTop}>
+                <div className={styles.schedule} aria-hidden="true" />
                 <button
                   type="button"
                   className={styles.trash}
@@ -109,14 +121,9 @@ export function Diary({
                   </svg>
                 </button>
               </div>
-            </div>
 
-            <div className={styles.barWrap} aria-hidden="true">
-              <div className={styles.barBg}>
-                <div
-                  className={styles.barFill}
-                  style={{ width: `${percent}%` }}
-                />
+              <div className={styles.speed}>
+                {typeof p.speed === "number" ? `${p.speed} pages per hour` : ""}
               </div>
             </div>
           </li>

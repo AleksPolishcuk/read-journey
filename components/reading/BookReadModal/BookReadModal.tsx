@@ -26,12 +26,11 @@ export function BookReadModal({ onClose }: { onClose: () => void }) {
           </svg>
         </button>
 
-        <div className={styles.icon} aria-hidden="true">
-          📚
-        </div>
+        <div className={styles.icon} aria-hidden="true" />
         <h3 className={styles.title}>The book is read</h3>
         <p className={styles.text}>
-          You finished the book. The reading progress has been saved.
+          It was an exciting journey, where each page revealed new horizons, and
+          the characters became inseparable friends.
         </p>
       </div>
     </div>

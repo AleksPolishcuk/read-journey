@@ -1,4 +1,3 @@
-// components/reading/Details/Details.tsx
 "use client";
 
 import styles from "./Details.module.css";
@@ -11,12 +10,33 @@ export function Details({
   onChangeMode,
   book,
   totalPages,
+  hasProgress,
 }: {
   mode: "diary" | "stats";
   onChangeMode: (m: "diary" | "stats") => void;
   book: UserBook;
   totalPages: number;
+  hasProgress: boolean;
 }) {
+  if (!hasProgress) {
+    return (
+      <section className={styles.card}>
+        <div className={styles.head}>
+          <h3 className={styles.title}>Progress</h3>
+        </div>
+
+        <div className={styles.progressBody}>
+          <p className={styles.progressText}>
+            Here you will see when and how much you read. To record, click on
+            the red button above.
+          </p>
+
+          <div className={styles.star} aria-hidden="true" />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.card}>
       <div className={styles.head}>
@@ -27,7 +47,9 @@ export function Details({
         <div className={styles.tabs}>
           <button
             type="button"
-            className={`${styles.tabBtn} ${mode === "diary" ? styles.active : ""}`}
+            className={`${styles.tabBtn} ${
+              mode === "diary" ? styles.active : ""
+            }`}
             onClick={() => onChangeMode("diary")}
             aria-label="Diary"
           >
@@ -38,7 +60,9 @@ export function Details({
 
           <button
             type="button"
-            className={`${styles.tabBtn} ${mode === "stats" ? styles.active : ""}`}
+            className={`${styles.tabBtn} ${
+              mode === "stats" ? styles.active : ""
+            }`}
             onClick={() => onChangeMode("stats")}
             aria-label="Statistics"
           >
@@ -48,6 +72,14 @@ export function Details({
           </button>
         </div>
       </div>
+
+      {mode === "stats" && (
+        <p className={styles.text}>
+          Each page, each chapter is a new round of knowledge, a new step
+          towards understanding. By rewriting statistics, we create our own
+          reading history.
+        </p>
+      )}
 
       {mode === "diary" ? (
         <Diary book={book} totalPages={totalPages} />

@@ -22,6 +22,13 @@ import {
   type ReadingProgress,
 } from "@/services/booksApi";
 
+function hasFinishedEntries(progress?: ReadingProgress[]) {
+  const list = progress ?? [];
+  return list.some(
+    (p) => p.status === "inactive" && typeof p.finishPage === "number",
+  );
+}
+
 export default function ReadingPage() {
   const sp = useSearchParams();
   const bookId = sp.get("bookId") ?? "";
@@ -30,9 +37,7 @@ export default function ReadingPage() {
     data: book,
     isLoading,
     isError,
-  } = useGetBookByIdQuery(bookId, {
-    skip: !bookId,
-  });
+  } = useGetBookByIdQuery(bookId, { skip: !bookId });
 
   const [startReading, { isLoading: isStarting }] = useStartReadingMutation();
   const [finishReading, { isLoading: isFinishing }] =
@@ -51,6 +56,12 @@ export default function ReadingPage() {
 
   const isActive = Boolean(activeEntry);
   const maxPages = book?.totalPages ?? 1;
+
+  const hasProgress = useMemo(() => {
+    if (!book) return false;
+    if (isActive) return true;
+    return hasFinishedEntries(book.progress);
+  }, [book, isActive]);
 
   const onSubmitPage = async (page: number) => {
     if (!bookId) return;
@@ -79,8 +90,6 @@ export default function ReadingPage() {
       <PageShell className={styles.page}>
         <Container>
           <div className={styles.stack}>
-            {/* Header у (private)/layout.tsx */}
-
             <section className={styles.dashboardCard}>
               {isLoading ? <p className={styles.state}>Loading...</p> : null}
               {isError ? (
@@ -88,31 +97,30 @@ export default function ReadingPage() {
               ) : null}
 
               {book ? (
-                <>
-                  <AddReadingForm
-                    maxPages={maxPages}
-                    isActive={isActive}
-                    isSubmitting={isStarting || isFinishing}
-                    onSubmitPage={onSubmitPage}
-                  />
+                <div className={styles.dashboardGrid}>
+                  <div className={styles.formCol}>
+                    <AddReadingForm
+                      maxPages={maxPages}
+                      isActive={isActive}
+                      isSubmitting={isStarting || isFinishing}
+                      onSubmitPage={onSubmitPage}
+                    />
+                  </div>
 
-                  <Details
-                    mode={mode}
-                    onChangeMode={setMode}
-                    book={book}
-                    totalPages={book.totalPages}
-                  />
-                </>
+                  <div className={styles.detailsCol}>
+                    <Details
+                      mode={mode}
+                      onChangeMode={setMode}
+                      book={book}
+                      totalPages={book.totalPages}
+                      hasProgress={hasProgress}
+                    />
+                  </div>
+                </div>
               ) : null}
             </section>
 
-            {book ? (
-              <MyBook
-                book={book}
-                isActive={isActive}
-                activeEntry={activeEntry}
-              />
-            ) : null}
+            {book ? <MyBook book={book} isActive={isActive} /> : null}
           </div>
         </Container>
 
