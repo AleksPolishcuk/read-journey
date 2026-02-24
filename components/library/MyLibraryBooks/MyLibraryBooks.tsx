@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
-
 import styles from "./MyLibraryBooks.module.css";
 import {
   useGetOwnBooksQuery,
@@ -13,15 +12,14 @@ import {
 
 type StatusFilter = "all" | "unread" | "in-progress" | "done";
 
-function truncate13(s: string) {
+function truncateTitle(s: string, max = 11): string {
   const clean = (s ?? "").trim();
-  if (clean.length <= 11) return clean;
-  return clean.slice(0, 11) + "…";
+  if (clean.length <= max) return clean;
+  return clean.slice(0, max) + "…";
 }
 
 const SIZES_LIBRARY_GRID =
   "(max-width: 374px) 50vw, (max-width: 767px) 160px, (max-width: 1439px) 180px, 208px";
-
 const SIZES_EMPTY = "(max-width: 767px) 90px, (max-width: 1439px) 110px, 130px";
 
 export function MyLibraryBooks({
@@ -31,7 +29,6 @@ export function MyLibraryBooks({
 }) {
   const { data, isLoading, isError } = useGetOwnBooksQuery();
   const [removeBook] = useRemoveBookMutation();
-
   const [status, setStatus] = useState<StatusFilter>("all");
 
   const list = useMemo(() => {
@@ -43,9 +40,10 @@ export function MyLibraryBooks({
   const onDelete = async (id: string) => {
     try {
       await removeBook(id).unwrap();
-      toast.success("Deleted");
-    } catch (e: any) {
-      const msg = e?.data?.message || e?.error || "Delete failed";
+      toast.success("Book deleted");
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; error?: string };
+      const msg = err?.data?.message ?? err?.error ?? "Delete failed";
       toast.error(msg);
     }
   };
@@ -54,12 +52,11 @@ export function MyLibraryBooks({
     <section className={styles.card}>
       <div className={styles.head}>
         <h2 className={styles.title}>My library</h2>
-
         <select
           className={styles.select}
           value={status}
           onChange={(e) => setStatus(e.target.value as StatusFilter)}
-          aria-label="Filter books"
+          aria-label="Filter books by status"
         >
           <option value="unread">Unread</option>
           <option value="in-progress">In progress</option>
@@ -83,7 +80,6 @@ export function MyLibraryBooks({
               priority={false}
             />
           </div>
-
           <p className={styles.emptyText}>
             To start training, add{" "}
             <span className={styles.emptySpan}>some of your books</span> or{" "}
@@ -118,17 +114,17 @@ export function MyLibraryBooks({
 
             <div className={styles.metaRow}>
               <div className={styles.meta}>
-                <p className={styles.name}>{truncate13(b.title)}</p>
+                {/* Fix #23: use truncateTitle with correct length */}
+                <p className={styles.name}>{truncateTitle(b.title)}</p>
                 <p className={styles.author}>{b.author}</p>
               </div>
-
               <button
                 type="button"
                 className={styles.delete}
                 onClick={() => onDelete(b._id)}
-                aria-label="Delete book"
+                aria-label={`Delete ${b.title}`}
               >
-                <svg width="28" height="28">
+                <svg width="28" height="28" aria-hidden="true">
                   <use href="/sprite.svg#icon-delete_block" />
                 </svg>
               </button>

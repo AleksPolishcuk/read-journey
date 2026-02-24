@@ -8,7 +8,7 @@ type BreakpointPerPage = {
   desktop: number;
 };
 
-function calcPerPage(cfg: BreakpointPerPage, width: number) {
+function calcPerPage(cfg: BreakpointPerPage, width: number): number {
   if (width >= 1440) return cfg.desktop;
   if (width >= 768) return cfg.tablet;
   return cfg.mobile;
@@ -26,8 +26,8 @@ export function useRecommendedPerPage(
   });
 
   const lastPerPageRef = useRef(perPage);
-
   const onChangeRef = useRef<(() => void) | undefined>(undefined);
+
   useEffect(() => {
     onChangeRef.current = onBreakpointChange;
   }, [onBreakpointChange]);
@@ -35,34 +35,26 @@ export function useRecommendedPerPage(
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const mDesktop = window.matchMedia("(min-width: 1440px)");
-    const mTablet = window.matchMedia("(min-width: 768px)");
+    const mqTablet = window.matchMedia("(min-width: 768px)");
+    const mqDesktop = window.matchMedia("(min-width: 1440px)");
 
     const recompute = () => {
-      const width = window.innerWidth;
-      const next = calcPerPage(cfgMemo, width);
-
+      const next = calcPerPage(cfgMemo, window.innerWidth);
       if (lastPerPageRef.current !== next) {
         lastPerPageRef.current = next;
         setPerPage(next);
-
         onChangeRef.current?.();
       }
     };
 
     recompute();
 
-    const onMediaChange = () => recompute();
-
-    mDesktop.addEventListener("change", onMediaChange);
-    mTablet.addEventListener("change", onMediaChange);
-
-    window.addEventListener("resize", recompute);
+    mqTablet.addEventListener("change", recompute);
+    mqDesktop.addEventListener("change", recompute);
 
     return () => {
-      mDesktop.removeEventListener("change", onMediaChange);
-      mTablet.removeEventListener("change", onMediaChange);
-      window.removeEventListener("resize", recompute);
+      mqTablet.removeEventListener("change", recompute);
+      mqDesktop.removeEventListener("change", recompute);
     };
   }, [cfgMemo]);
 

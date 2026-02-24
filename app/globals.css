@@ -1,3 +1,5 @@
+
+
 @font-face {
   font-family: "Gilroy";
   src: url("/fonts/Gilroy-Medium.woff2") format("woff2");
@@ -44,6 +46,8 @@
 
   --c-error: #e90516;
 
+  --c-accent: #4f92f7;
+
   --radius-xl: 30px;
   --radius-lg: 16px;
   --radius-md: 12px;
@@ -54,15 +58,18 @@
   --bp-768: 768px;
   --bp-1440: 1440px;
 
-  --page-pad: 20px;
-
-  --container-max: 100%;
+  --page-pad-mobile: 20px;
+  --page-pad-tablet: 20px;
+  --page-pad-desktop: 20px;
 
   --container-375: 335px;
-
   --container-768: 704px;
-
   --container-1440: 1240px;
+
+  --page-pad: var(--page-pad-mobile);
+  --container-max: 100%;
+  --container-tablet: var(--container-768);
+  --container-desktop: var(--container-1440);
 }
 
 @media (min-width: 375px) {
@@ -76,6 +83,7 @@
   :root {
     --container-max: var(--container-768);
     --bp-index: 1;
+    --page-pad: var(--page-pad-tablet);
   }
 }
 
@@ -83,6 +91,7 @@
   :root {
     --container-max: var(--container-1440);
     --bp-index: 2;
+    --page-pad: var(--page-pad-desktop);
   }
 }
 

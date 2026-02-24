@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import styles from "./AddReadingForm.module.css";
 import { Input } from "@/components/common/Input/Input";
 import { createReadingSchema } from "@/lib/validation/readingSchemas";
@@ -28,14 +27,17 @@ export function AddReadingForm({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
-    defaultValues: { page: 0 as any },
+
+    defaultValues: { page: "" as unknown as number },
   });
 
   const onSubmit = async (values: FormValues) => {
     await onSubmitPage(Number(values.page));
+    reset({ page: "" as unknown as number });
   };
 
   return (
@@ -43,17 +45,15 @@ export function AddReadingForm({
       <p className={styles.labelTop}>
         {isActive ? "Stop page:" : "Start page:"}
       </p>
-
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Page number"
           type="text"
+          inputMode="numeric"
           placeholder="0"
           error={errors.page?.message}
-          inputMode="numeric"
-          {...register("page", { valueAsNumber: true })}
+          {...register("page")}
         />
-
         <button className={styles.btn} type="submit" disabled={isSubmitting}>
           {isActive ? "To stop" : "To start"}
         </button>

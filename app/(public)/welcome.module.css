@@ -4,10 +4,17 @@
   padding: 20px 20px 28px;
 }
 
-.logo {
+.logoIcon {
   width: 48px;
   height: 18px;
   display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.logoFull {
+  display: none;
   align-items: center;
 }
 
@@ -83,13 +90,21 @@
 
 @media (min-width: 768px) {
   .panel {
-    width: var(--container-768);
+    width: 100%;
     padding: 40px 64px 64px;
     margin: 32px auto 32px;
   }
 
   .title {
     font-size: 64px;
+  }
+
+  .logoIcon {
+    display: none;
+  }
+
+  .logoFull {
+    display: flex;
   }
 
   .text {

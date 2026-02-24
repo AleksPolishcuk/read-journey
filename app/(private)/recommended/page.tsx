@@ -2,13 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 import { AuthGuard } from "@/components/auth/AuthGuard/AuthGuard";
 import { PageShell } from "@/components/common/PageShell/PageShell";
 import { Container } from "@/components/common/Container/Container";
-
 import styles from "./recommended.module.css";
-
 import {
   FiltersForm,
   type FiltersValues,
@@ -17,7 +15,6 @@ import { BookCard } from "@/components/recommended/BookCard/BookCard";
 import { BookModal } from "@/components/recommended/BookModal/BookModal";
 import { useGetRecommendedQuery } from "@/services/booksApi";
 import { useRecommendedPerPage } from "@/lib/hooks/useRecommendedPerPage";
-import Image from "next/image";
 
 export default function RecommendedPage() {
   const [page, setPage] = useState(1);
@@ -69,38 +66,40 @@ export default function RecommendedPage() {
 
               <div className={styles.infoCard}>
                 <h3 className={styles.infoTitle}>Start your workout</h3>
-
                 <div className={styles.steps}>
                   <div className={styles.step}>
                     <div className={styles.stepNum}>1</div>
                     <p className={styles.stepText}>
                       <span className={styles.stepTitle}>
-                        Create a personal library:
-                      </span>{" "}
+                        Create a personal library:{" "}
+                      </span>
                       add the books you intend to read to it.
                     </p>
                   </div>
-
                   <div className={styles.step}>
                     <div className={styles.stepNum}>2</div>
                     <p className={styles.stepText}>
                       <span className={styles.stepTitle}>
-                        Create your first workout:
-                      </span>{" "}
+                        Create your first workout:{" "}
+                      </span>
                       define a goal, choose a period, start training.
                     </p>
                   </div>
                 </div>
-
                 <div className={styles.myLibraryRow}>
                   <span className={styles.myLibraryLink}>My library</span>
-                  <Link className={styles.myLibraryBtn} href="/library">
-                    <svg width="24" height="24">
+                  <Link
+                    className={styles.myLibraryBtn}
+                    href="/library"
+                    aria-label="Go to My Library"
+                  >
+                    <svg width="24" height="24" aria-hidden="true">
                       <use href="/sprite.svg#icon-log-in" />
                     </svg>
                   </Link>
                 </div>
               </div>
+
               <div className={styles.quoteCard} aria-hidden="true">
                 <div className={styles.quoteInner}>
                   <div className={styles.quoteIcon}>
@@ -112,7 +111,6 @@ export default function RecommendedPage() {
                       priority={false}
                     />
                   </div>
-
                   <p className={styles.quoteText}>
                     &ldquo;Books are{" "}
                     <span className={styles.quoteWorld}>windows</span> to the
@@ -125,28 +123,26 @@ export default function RecommendedPage() {
             <section className={styles.booksCard}>
               <div className={styles.booksHead}>
                 <h2 className={styles.booksTitle}>Recommended</h2>
-
                 <div className={styles.pager}>
                   <button
                     className={styles.pagerBtn}
                     type="button"
-                    aria-label="prev"
+                    aria-label="Previous page"
                     disabled={!canPrev}
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                   >
-                    <svg width="16" height="16">
+                    <svg width="16" height="16" aria-hidden="true">
                       <use href="/sprite.svg#icon-bi_chevron-left" />
                     </svg>
                   </button>
-
                   <button
                     className={styles.pagerBtn}
                     type="button"
-                    aria-label="next"
+                    aria-label="Next page"
                     disabled={!canNext}
                     onClick={() => setPage((p) => p + 1)}
                   >
-                    <svg width="16" height="16">
+                    <svg width="16" height="16" aria-hidden="true">
                       <use href="/sprite.svg#icon-bi_chevron-right" />
                     </svg>
                   </button>
@@ -156,6 +152,11 @@ export default function RecommendedPage() {
               {isLoading ? <p className={styles.state}>Loading...</p> : null}
               {isError ? (
                 <p className={styles.state}>Failed to load recommended books</p>
+              ) : null}
+              {!isLoading && !isError && shownBooks.length === 0 ? (
+                <p className={styles.state}>
+                  No books found. Try different filters.
+                </p>
               ) : null}
 
               <div className={styles.booksGrid}>

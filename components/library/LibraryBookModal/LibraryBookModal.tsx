@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
-
 import styles from "./LibraryBookModal.module.css";
 import { useGetBookByIdQuery } from "@/services/booksApi";
+import { useModal } from "@/lib/hooks/useModal";
 
 const SIZES_MODAL = "(max-width: 767px) 160px, 160px";
 
@@ -20,27 +20,34 @@ export function LibraryBookModal({
   const router = useRouter();
   const { data, isLoading, isError } = useGetBookByIdQuery(bookId);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  useModal(onClose);
 
-  const onStartReading = () => {
+  const onStartReading = useCallback(() => {
     router.push(`/reading?bookId=${encodeURIComponent(bookId)}`);
     onClose();
-    toast("Start reading");
-  };
+    toast.success("Let's start reading!");
+  }, [router, bookId, onClose]);
+
+  const handleBackdropKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter" || e.key === " ") onClose();
+    },
+    [onClose],
+  );
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
+    <div
+      className={styles.backdrop}
+      onClick={onClose}
+      onKeyDown={handleBackdropKeyDown}
+      role="presentation"
+    >
       <div
         className={styles.modal}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-label="Book details"
       >
         <button
           className={styles.close}
@@ -48,7 +55,7 @@ export function LibraryBookModal({
           onClick={onClose}
           aria-label="Close"
         >
-          <svg width="22" height="22">
+          <svg width="22" height="22" aria-hidden="true">
             <use href="/sprite.svg#icon-x" />
           </svg>
         </button>

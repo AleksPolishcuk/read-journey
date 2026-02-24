@@ -1,27 +1,40 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback } from "react";
 import styles from "./BookReadModal.module.css";
+import { useModal } from "@/lib/hooks/useModal";
 
 export function BookReadModal({ onClose }: { onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  useModal(onClose);
+
+  const handleBackdropKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter" || e.key === " ") onClose();
+    },
+    [onClose],
+  );
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={styles.backdrop}
+      onClick={onClose}
+      onKeyDown={handleBackdropKeyDown}
+      role="presentation"
+    >
+      <div
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Book finished"
+      >
         <button
           className={styles.close}
           type="button"
           onClick={onClose}
           aria-label="Close"
         >
-          <svg width="22" height="22">
+          <svg width="22" height="22" aria-hidden="true">
             <use href="/sprite.svg#icon-x" />
           </svg>
         </button>

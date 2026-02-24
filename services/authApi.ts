@@ -7,9 +7,11 @@ export type User = {
 };
 
 export type AuthResponse = {
-  accessToken: string;
+  token: string;
   refreshToken: string;
-  user: User;
+  name: string;
+  email: string;
+  _id?: string;
 };
 
 export type LoginRequest = {
@@ -43,7 +45,7 @@ export const authApi = api.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
 
-    getCurrentUser: builder.query<User, void>({
+    getCurrentUser: builder.query<AuthResponse, void>({
       query: () => ({
         url: "/users/current",
         method: "GET",
@@ -51,7 +53,7 @@ export const authApi = api.injectEndpoints({
       providesTags: ["Auth"],
     }),
 
-    refreshToken: builder.query<AuthResponse, void>({
+    refreshToken: builder.query<{ token: string; refreshToken: string }, void>({
       query: () => ({
         url: "/users/current/refresh",
         method: "GET",

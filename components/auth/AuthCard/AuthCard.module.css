@@ -9,7 +9,6 @@
   gap: 12px;
 }
 
-/* tablet */
 @media (min-width: 768px) {
   .page {
     padding: var(--page-pad-tablet);
@@ -23,7 +22,6 @@
   }
 }
 
-/* desktop */
 @media (min-width: 1440px) {
   .page {
     padding: var(--page-pad-desktop);

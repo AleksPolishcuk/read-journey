@@ -6,34 +6,47 @@ import styles from "./PhoneCard.module.css";
 
 type Viewport = "mobile" | "tablet" | "desktop";
 
-function getViewport(w: number): Viewport {
-  if (w >= 1440) return "desktop";
-  if (w >= 768) return "tablet";
+function getViewport(tabletMin: number, desktopMin: number): Viewport {
+  if (window.matchMedia(`(min-width: ${desktopMin}px)`).matches)
+    return "desktop";
+  if (window.matchMedia(`(min-width: ${tabletMin}px)`).matches) return "tablet";
   return "mobile";
 }
 
-export function PhonePreview() {
+export function PhonePreview({
+  tabletMin = 768,
+  desktopMin = 1440,
+}: {
+  tabletMin?: number;
+  desktopMin?: number;
+}) {
   const [vp, setVp] = useState<Viewport | null>(null);
 
   useEffect(() => {
-    const onResize = () => setVp(getViewport(window.innerWidth));
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+    const mqTablet = window.matchMedia(`(min-width: ${tabletMin}px)`);
+    const mqDesktop = window.matchMedia(`(min-width: ${desktopMin}px)`);
 
-  // щоб не було гідраційних глічів — рендеримо після mount
+    const update = () => setVp(getViewport(tabletMin, desktopMin));
+
+    update();
+
+    mqTablet.addEventListener("change", update);
+    mqDesktop.addEventListener("change", update);
+
+    return () => {
+      mqTablet.removeEventListener("change", update);
+      mqDesktop.removeEventListener("change", update);
+    };
+  }, [tabletMin, desktopMin]);
+
   if (!vp) return null;
 
-  // ✅ tablet: PhonePreview НЕ рендериться
   if (vp === "tablet") return null;
 
-  // ✅ mobile/desktop: різні картинки (і @2x)
   const isDesktop = vp === "desktop";
   const src = isDesktop
     ? "/images/iPhone 15 desktop@2x.png"
     : "/images/iPhone 15 phone@2x.png";
-
   const width = isDesktop ? 600 : 225;
   const height = isDesktop ? 736 : 315;
 
@@ -46,7 +59,6 @@ export function PhonePreview() {
           width={width}
           height={height}
           className={styles.img}
-          // важливо для правильного підбору зображення під viewport
           sizes={
             isDesktop
               ? "(min-width: 1440px) 600px, 0px"

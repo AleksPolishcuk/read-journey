@@ -1,9 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  /* gap: 6px; */
   min-width: 0;
-  height: 260px;
 }
 
 .coverBtn {
@@ -11,31 +9,30 @@
   padding: 0;
   background: transparent;
   cursor: pointer;
+  display: block;
+  width: 71px;
 }
 
-.coverImg,
-.coverStub {
+.coverImg {
   width: 71px;
-  height: 190px;
+  aspect-ratio: 2 / 3;
   border-radius: 12px;
+  display: block;
+}
+
+.coverImg {
+  object-fit: fill;
 }
 
 .coverStub {
   background: #d9d9d9;
 }
 
-.coverImg {
-  display: block;
-  object-fit: fill;
-}
-
 .title {
-  margin: 8px 0 0 0;
+  margin: 8px 0 0;
   font-size: 10px;
   font-weight: var(--fw-700);
   line-height: 1.25;
-  /* min-height: calc(12px * 1.25 * 2); */
-
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -43,25 +40,25 @@
 }
 
 .author {
-  margin: 2px 0 0 0;
+  margin: 2px 0 0;
   font-size: 10px;
   color: rgba(249, 249, 249, 0.45);
   font-family: var(--second-family);
   line-height: 1.2;
-  min-height: calc(10px * 1.2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .strip {
-  height: auto;
   width: 71px;
 }
 
 .strip .coverImg,
 .strip .coverStub {
+  width: 71px;
   height: 107px;
+  aspect-ratio: unset;
   border-radius: 8px;
 }
 
@@ -76,7 +73,15 @@
 @media (min-width: 1440px) {
   .coverImg,
   .coverStub {
-    width: 138px;
-    height: 208px;
+    border-radius: 14px;
+  }
+
+  .strip {
+    width: 71px;
+  }
+
+  .strip .coverImg,
+  .strip .coverStub {
+    height: 120px;
   }
 }

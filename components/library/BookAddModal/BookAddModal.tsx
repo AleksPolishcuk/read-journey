@@ -1,30 +1,43 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback } from "react";
 import Image from "next/image";
 import styles from "./BookAddModal.module.css";
+import { useModal } from "@/lib/hooks/useModal";
 
 const SIZES_GOOD = "(max-width: 767px) 54px, 54px";
 
 export function CreateBookSuccessModal({ onClose }: { onClose: () => void }) {
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  useModal(onClose);
+
+  const handleBackdropKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter" || e.key === " ") onClose();
+    },
+    [onClose],
+  );
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={styles.backdrop}
+      onClick={onClose}
+      onKeyDown={handleBackdropKeyDown}
+      role="presentation"
+    >
+      <div
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Book added successfully"
+      >
         <button
           className={styles.close}
           onClick={onClose}
           aria-label="Close"
           type="button"
         >
-          <svg width="22" height="22">
+          <svg width="22" height="22" aria-hidden="true">
             <use href="/sprite.svg#icon-x" />
           </svg>
         </button>

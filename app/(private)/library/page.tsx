@@ -87,7 +87,6 @@ export default function LibraryPage() {
               </div>
             </section>
 
-            {/* RIGHT / BELOW: My library */}
             <MyLibraryBooks onOpenBook={(id) => setActiveBookId(id)} />
           </div>
         </Container>

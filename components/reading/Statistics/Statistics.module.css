@@ -47,7 +47,7 @@
   width: 132px;
   height: 132px;
   border-radius: 999px;
-  background: var (--c-black);
+  background: var(--c-black);
 
   display: grid;
   place-items: center;

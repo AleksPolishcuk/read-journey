@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
-
 import styles from "./RegisterForm.module.css";
 import { Input } from "@/components/common/Input/Input";
 import { registerValidationSchema } from "@/lib/validation/authSchemas";
@@ -37,11 +36,14 @@ export function RegisterForm() {
   const onSubmit = async (data: FormValues) => {
     try {
       const res = await registerUser(data).unwrap();
+
       dispatch(setCredentials(res));
-      toast.success("Registered");
+
+      toast.success("Registered successfully");
       router.replace("/recommended");
-    } catch (e: any) {
-      const msg = e?.data?.message || e?.error || "Registration failed";
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; error?: string };
+      const msg = err?.data?.message ?? err?.error ?? "Registration failed";
       toast.error(msg);
     }
   };
@@ -55,7 +57,6 @@ export function RegisterForm() {
         error={errors.name?.message}
         {...register("name")}
       />
-
       <Input
         label="Mail"
         type="email"
@@ -63,7 +64,6 @@ export function RegisterForm() {
         error={errors.email?.message}
         {...register("email")}
       />
-
       <Input
         label="Password"
         type={showPassword ? "text" : "password"}
@@ -74,12 +74,10 @@ export function RegisterForm() {
         onTogglePassword={() => setShowPassword((prev) => !prev)}
         {...register("password")}
       />
-
       <div className={styles.row}>
         <button className={styles.submit} type="submit" disabled={isLoading}>
           Registration
         </button>
-
         <Link className={styles.link} href="/login">
           Already have an account?
         </Link>

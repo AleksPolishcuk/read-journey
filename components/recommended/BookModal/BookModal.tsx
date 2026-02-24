@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import styles from "./BookModal.module.css";
@@ -8,6 +8,7 @@ import {
   useAddFromRecommendedMutation,
   useGetBookByIdQuery,
 } from "@/services/booksApi";
+import { useModal } from "@/lib/hooks/useModal";
 
 const SIZES_MODAL = "(max-width: 767px) 140px, 160px";
 
@@ -21,13 +22,14 @@ export function BookModal({
   const { data, isLoading, isError } = useGetBookByIdQuery(bookId);
   const [addBook, { isLoading: isAdding }] = useAddFromRecommendedMutation();
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  useModal(onClose);
+
+  const handleBackdropKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter" || e.key === " ") onClose();
+    },
+    [onClose],
+  );
 
   const onAdd = async () => {
     try {
@@ -35,12 +37,8 @@ export function BookModal({
       toast.success("Added to library");
       onClose();
     } catch (e: unknown) {
-      const msg =
-        (typeof (e as Record<string, string | { message: string }>)?.data ===
-          "object" &&
-          (e as Record<string, { message: string }>)?.data?.message) ||
-        (e as Record<string, string>)?.error ||
-        "Add to library failed";
+      const err = e as { data?: { message?: string }; error?: string };
+      const msg = err?.data?.message ?? err?.error ?? "Add to library failed";
       toast.error(msg);
     }
   };
@@ -48,12 +46,18 @@ export function BookModal({
   const cover = data?.imageUrl ?? "";
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
+    <div
+      className={styles.backdrop}
+      onClick={onClose}
+      onKeyDown={handleBackdropKeyDown}
+      role="presentation"
+    >
       <div
         className={styles.modal}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-label="Book details"
       >
         <button
           className={styles.close}
@@ -61,7 +65,7 @@ export function BookModal({
           onClick={onClose}
           aria-label="Close"
         >
-          <svg width="22" height="22">
+          <svg width="22" height="22" aria-hidden="true">
             <use href="/sprite.svg#icon-x" />
           </svg>
         </button>

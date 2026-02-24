@@ -124,7 +124,6 @@
   transition: background 0.2s ease;
 }
 
-/* tablet/desktop modal size like макет */
 @media (min-width: 768px) {
   .modal {
     width: 500px;

@@ -4,10 +4,23 @@ import ReduxProvider from "@/redux/provider";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Read Journey",
-  description: "Read Journey App",
+  title: {
+    default: "Read Journey",
+    template: "%s | Read Journey",
+  },
+  description:
+    "Read Journey — track your reading progress, build your personal library, and discover new books.",
   icons: {
-    icon: [{ url: "/icon.png" }],
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  openGraph: {
+    title: "Read Journey",
+    description:
+      "Track your reading progress, build your personal library, and discover new books.",
+    type: "website",
   },
 };
 
@@ -22,7 +35,7 @@ export default function RootLayout({
         <ReduxProvider>
           {children}
           <Toaster
-            position="top-center"
+            position="top-right"
             toastOptions={{
               duration: 3000,
             }}

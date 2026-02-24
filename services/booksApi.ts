@@ -23,15 +23,6 @@ export type GetRecommendBooksResponse = {
   perPage: number;
 };
 
-export type BookProgressItem = {
-  startPage: number;
-  startReading: string;
-  finishPage?: number;
-  finishReading?: string;
-  speed?: number;
-  status?: "active" | "inactive";
-};
-
 export type AddNewBookRequest = {
   title: string;
   author: string;
@@ -39,7 +30,7 @@ export type AddNewBookRequest = {
 };
 
 export type RemoveBookResponse = {
-  id: string;
+  _id: string;
   message: string;
 };
 

@@ -3,14 +3,19 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { hydrateAuth, clearAuth, setUser } from "@/redux/features/authSlice";
+import {
+  hydrateAuth,
+  clearAuth,
+  setCredentials,
+  setUser,
+} from "@/redux/features/authSlice";
 import { selectIsAuth, selectIsHydrated } from "@/redux/features/selectors";
 import { useGetCurrentUserQuery } from "@/services/authApi";
+import type { User } from "@/redux/features/authSlice";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-
   const isAuth = useAppSelector(selectIsAuth);
   const isHydrated = useAppSelector(selectIsHydrated);
 
@@ -18,7 +23,11 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     if (!isHydrated) dispatch(hydrateAuth());
   }, [dispatch, isHydrated]);
 
-  const me = useGetCurrentUserQuery(undefined, {
+  const {
+    data: currentUser,
+    isError,
+    error,
+  } = useGetCurrentUserQuery(undefined, {
     skip: !isHydrated || !isAuth,
   });
 
@@ -28,17 +37,28 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   }, [isHydrated, isAuth, router]);
 
   useEffect(() => {
-    if (me.data) dispatch(setUser(me.data));
-  }, [dispatch, me.data]);
+    if (!currentUser) return;
+
+    if (currentUser.token || currentUser.refreshToken) {
+      dispatch(setCredentials(currentUser));
+    }
+
+    const user: User = {
+      _id: currentUser._id ?? "",
+      name: currentUser.name ?? "",
+      email: currentUser.email ?? "",
+    };
+    dispatch(setUser(user));
+  }, [dispatch, currentUser]);
 
   useEffect(() => {
-    if (!me.isError) return;
-    const status = (me.error as any)?.status;
+    if (!isError) return;
+    const status = (error as { status?: number })?.status;
     if (status === 401 || status === 403) {
       dispatch(clearAuth());
       router.replace("/");
     }
-  }, [dispatch, me.isError, me.error, router]);
+  }, [dispatch, isError, error, router]);
 
   if (!isHydrated) return null;
   if (!isAuth) return null;

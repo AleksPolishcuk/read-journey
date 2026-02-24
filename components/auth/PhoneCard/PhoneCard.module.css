@@ -14,7 +14,6 @@
   height: auto;
 }
 
-/* desktop — як у макеті: окрема card справа з округленням */
 @media (min-width: 1440px) {
   .card {
     padding: 80px 98px 0 98px;

@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-
 import styles from "./AddBookForm.module.css";
 import { Input } from "@/components/common/Input/Input";
 import { useAddBookMutation } from "@/services/booksApi";
@@ -23,7 +22,18 @@ const schema = Yup.object({
     .min(2, "Author must contain at least 2 characters.")
     .required("Author is required"),
   totalPages: Yup.number()
+    .transform((value, originalValue) => {
+      if (
+        originalValue === "" ||
+        originalValue === null ||
+        originalValue === undefined
+      ) {
+        return NaN;
+      }
+      return Number(originalValue);
+    })
     .typeError("Pages must be a number")
+    .integer("Pages must be a whole number")
     .min(1, "Pages must be at least 1")
     .required("Pages is required"),
 });
@@ -38,7 +48,11 @@ export function AddBookForm({ onCreated }: { onCreated: () => void }) {
     reset,
   } = useForm<Values>({
     resolver: yupResolver(schema),
-    defaultValues: { title: "", author: "", totalPages: 0 },
+    defaultValues: {
+      title: "",
+      author: "",
+      totalPages: "" as unknown as number,
+    },
   });
 
   const onSubmit = async (data: Values) => {
@@ -48,11 +62,11 @@ export function AddBookForm({ onCreated }: { onCreated: () => void }) {
         author: data.author.trim(),
         totalPages: Number(data.totalPages),
       }).unwrap();
-
       reset();
       onCreated();
-    } catch (e: any) {
-      const msg = e?.data?.message || e?.error || "Add book failed";
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; error?: string };
+      const msg = err?.data?.message ?? err?.error ?? "Add book failed";
       toast.error(msg);
     }
   };
@@ -80,6 +94,7 @@ export function AddBookForm({ onCreated }: { onCreated: () => void }) {
       <Input
         label="Number of pages"
         type="text"
+        inputMode="numeric"
         placeholder="0"
         error={errors.totalPages?.message}
         {...register("totalPages")}

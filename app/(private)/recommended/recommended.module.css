@@ -3,7 +3,6 @@
   justify-content: center;
 }
 
-/* MOBILE (320-767): як у тебе зараз — стек */
 .stack {
   display: flex;
   flex-direction: column;

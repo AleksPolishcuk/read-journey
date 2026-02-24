@@ -11,9 +11,16 @@ export default function WelcomePage() {
     <PublicOnly>
       <AuthCard>
         <section className={styles.panel}>
-          <div className={styles.logo}>
-            <svg width="48" height="18" aria-hidden="true">
+          <div className={styles.logoIcon} aria-label="ReadJourney">
+            <svg width="42" height="18" aria-hidden="true">
               <use href="/sprite.svg#icon-Logo_small" />
+            </svg>
+          </div>
+
+          {/* Tablet/Desktop full logo */}
+          <div className={styles.logoFull} aria-label="ReadJourney">
+            <svg width="182" height="20" aria-hidden="true">
+              <use href="/sprite.svg#icon-Logo" />
             </svg>
           </div>
 

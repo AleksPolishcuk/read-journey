@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
-
 import styles from "./LoginForm.module.css";
 import { Input } from "@/components/common/Input/Input";
 import { loginValidationSchema } from "@/lib/validation/authSchemas";
@@ -36,11 +35,14 @@ export function LoginForm() {
   const onSubmit = async (data: FormValues) => {
     try {
       const res = await login(data).unwrap();
+
       dispatch(setCredentials(res));
+
       toast.success("Logged in");
       router.replace("/recommended");
-    } catch (e: any) {
-      const msg = e?.data?.message || e?.error || "Login failed";
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; error?: string };
+      const msg = err?.data?.message ?? err?.error ?? "Login failed";
       toast.error(msg);
     }
   };
@@ -54,7 +56,6 @@ export function LoginForm() {
         error={errors.email?.message}
         {...register("email")}
       />
-
       <Input
         label="Password"
         type={showPassword ? "text" : "password"}
@@ -65,12 +66,10 @@ export function LoginForm() {
         onTogglePassword={() => setShowPassword((prev) => !prev)}
         {...register("password")}
       />
-
       <div className={styles.row}>
         <button className={styles.submit} type="submit" disabled={isLoading}>
           Log in
         </button>
-
         <Link className={styles.link} href="/register">
           Don&apos;t have an account?
         </Link>

@@ -76,6 +76,13 @@
     display: flex;
     margin-left: 94px;
   }
+  .logoIcon {
+    display: none;
+  }
+
+  .logoFull {
+    display: flex;
+  }
 
   .logoutInline {
     display: block;
@@ -100,14 +107,6 @@
 
   .center {
     margin-left: 0;
-  }
-
-  .logoIcon {
-    display: none;
-  }
-
-  .logoFull {
-    display: flex;
   }
 
   .userTablet {
