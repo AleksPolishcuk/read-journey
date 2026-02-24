@@ -91,7 +91,10 @@
   font-size: 12px;
   font-weight: var(--fw-700);
   letter-spacing: -0.02em;
-  color: rgba(249, 249, 249, 0.92);
+  color: var(--c-text);
+  line-height: 1.33;
+  letter-spacing: 0.02em;
+
   white-space: nowrap;
 }
 
@@ -108,19 +111,19 @@
 
 .percentBlock {
   display: grid;
-  gap: 6px;
+  gap: 4px;
 }
 
 .percent {
-  font-size: 18px;
-  font-weight: var(--fw-700);
+  font-size: 14px;
+  font-weight: var(--fw-500);
   letter-spacing: -0.02em;
-  color: rgba(249, 249, 249, 0.92);
+  color: var(--c-text);
 }
 
 .mins {
   font-size: 12px;
-  color: rgba(249, 249, 249, 0.35);
+  color: var(--c-gray);
   font-family: var(--second-family);
   white-space: nowrap;
 }
@@ -134,16 +137,14 @@
 .rightTop {
   display: flex;
   align-items: center;
-  gap: 10px;
   justify-content: flex-end;
   width: 100%;
 }
 
 .schedule {
-  width: 74px;
-  height: 26px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
+  width: 43px;
+  height: 18px;
+
   background-image: image-set(
     url("/images/schedule.png") 1x,
     url("/images/schedule@2x.png") 2x

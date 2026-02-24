@@ -12,7 +12,7 @@ import {
 
 type StatusFilter = "all" | "unread" | "in-progress" | "done";
 
-function truncateTitle(s: string, max = 11): string {
+function truncateTitle(s: string, max = 10): string {
   const clean = (s ?? "").trim();
   if (clean.length <= max) return clean;
   return clean.slice(0, max) + "…";

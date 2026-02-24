@@ -87,7 +87,6 @@ export function Diary({
                 <span className={styles.date}>
                   {formatDate(p.startReading)}
                 </span>
-                <span className={styles.pagesRight}>{pagesRead} pages</span>
               </div>
               <div className={styles.rowMid}>
                 <div className={styles.percentBlock}>
@@ -98,6 +97,7 @@ export function Diary({
             </div>
 
             <div className={styles.right}>
+              <span className={styles.pagesRight}>{pagesRead} pages</span>
               <div className={styles.rightTop}>
                 <div className={styles.schedule} aria-hidden="true" />
                 <button

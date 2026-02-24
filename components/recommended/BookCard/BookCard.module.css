@@ -10,13 +10,13 @@
   background: transparent;
   cursor: pointer;
   display: block;
-  width: 71px;
+  width: 100%;
 }
 
 .coverImg {
-  width: 71px;
-  aspect-ratio: 2 / 3;
-  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 137 / 248;
+  border-radius: 8px;
   display: block;
 }
 
@@ -30,7 +30,7 @@
 
 .title {
   margin: 8px 0 0;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: var(--fw-700);
   line-height: 1.25;
   display: -webkit-box;
@@ -42,8 +42,8 @@
 .author {
   margin: 2px 0 0;
   font-size: 10px;
-  color: rgba(249, 249, 249, 0.45);
-  font-family: var(--second-family);
+  color: var(--c-gray);
+  font-family: var(--font-family);
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -78,10 +78,5 @@
 
   .strip {
     width: 71px;
-  }
-
-  .strip .coverImg,
-  .strip .coverStub {
-    height: 120px;
   }
 }

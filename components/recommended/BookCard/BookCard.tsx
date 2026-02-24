@@ -34,8 +34,8 @@ export function BookCard({
             className={styles.coverImg}
             src={book.imageUrl}
             alt={book.title}
-            width={isStrip ? 120 : 190}
-            height={isStrip ? 107 : 260}
+            width={isStrip ? 120 : 138}
+            height={isStrip ? 107 : 208}
             sizes={isStrip ? SIZES_RECOMMENDED_STRIP : SIZES_RECOMMENDED_GRID}
             priority={false}
           />

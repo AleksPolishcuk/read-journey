@@ -113,7 +113,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 14px;
+  gap: 2px;
 }
 
 .meta {
@@ -127,6 +127,9 @@
   font-weight: var(--fw-700);
   line-height: 1.28;
   letter-spacing: -0.02em;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -158,6 +161,9 @@
     padding: 40px;
     min-height: 518px;
   }
+  .title {
+    font-size: 28px;
+  }
 
   .select {
     width: 154px;
@@ -188,7 +194,7 @@
 @media (min-width: 1440px) {
   .card {
     padding: 40px;
-    min-height: 651px; /* desktop like макет */
+    min-height: 651px;
   }
 
   .select {
@@ -207,7 +213,12 @@
   }
 
   .grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 2fr);
     gap: 24px;
+    margin-top: 28px;
+  }
+
+  .item {
+    height: 248px;
   }
 }
